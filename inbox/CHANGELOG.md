@@ -7,6 +7,37 @@ This is the one authored file in `inbox/` — everything else here is dropped, n
 
 ---
 
+## 2026-08-01 · First app repo is live — interview-copilot
+
+**https://github.com/appydave-hackerthons/interview-copilot** — public.
+
+Ethan's idea from the lineage-one interview, now a real repo. Seeded with a README; no code yet.
+
+> A dashboard where a team of AI agents co-pilot a live interview — surfacing questions to ask and
+> biases to avoid, so the interviewee opens up.
+
+**Ethan** = `gee842` on GitHub (resolved from his email). Invited with **write access** — the
+invite is pending until he accepts it from his email.
+
+### New — app dossiers, for Karlen's presentations
+
+`docs/apps/` — one file per micro-app, same shape every time. This is the presentation source: when
+you need to talk about any app in the portfolio, it's all in one place.
+
+Each dossier carries: name · one line · the problem · who it's for · what it does · **tech stack** ·
+**why this stack** · status · links · lineage · owner.
+
+**Why the fixed shape:** five apps described five different ways can't be presented as a portfolio —
+the audience spends attention re-learning the format instead of hearing the content. It also makes
+gaps *visible*: an empty section is a question to go and ask, not something that quietly never gets
+written.
+
+**The rule that matters: never invent the stack.** `interview-copilot` has "— pending" under both
+tech stack and why-this-stack, because the repo holds a README and nothing else. A guessed stack is
+a guaranteed wrong answer in a Q&A. It gets filled from the manifest when Ethan pushes.
+
+---
+
 ## 2026-08-01 · Logo decided — design system now the full reference
 
 `claude.ai/code/artifact/601c7895-b9f7-443a-b68b-c373ba223692` — updated in place, same link.
