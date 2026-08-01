@@ -32,6 +32,13 @@ Two further constraints found in `server/src/enrich/index.ts`:
 Also: `capture_create` is **not exposed** in this session's MCP surface — 7 tools are available,
 not the 8 previously reported. The HTTP endpoint exists; the MCP tool is not reachable from here.
 
+> **Superseded 2026-08-01 (captain-swag):** `capture_create` shipped to the MCP surface that same
+> morning (`c2436ba` in captains-log). The 7-tool reading was a connection made before the server
+> picked the change up — new connections see 8 tools. Proven live end-to-end: capture **B344**
+> (`CM4S-L1 · agent · captain-swag`) was created over MCP and round-trips via `q: "CM4S"`. The
+> step-1 done-condition is now achievable except the find-by-*tag* leg, which still waits on the
+> `cm4s` ontology decision below.
+
 ## What does work
 
 Verified live: `captures_search` with `q: "hackathon"` returned B343 — last night's conversation —

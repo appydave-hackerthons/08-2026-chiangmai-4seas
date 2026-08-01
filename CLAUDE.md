@@ -44,7 +44,7 @@ then compare where they converge.
 
 | Gate | State | Detail |
 |---|---|---|
-| Captain's Log MCP | **Cleared, one gap** | Live on :7101. No participant/entity field. **Tags are not settable at capture time** and off-ontology tags are dropped — lineage separation runs on a spoken slate + title convention instead. See `docs/tag-convention.md`. |
+| Captain's Log MCP | **Cleared, one gap** | Live on :7101, **8 tools since 2026-08-01 (`c2436ba`): `capture_create` is now on the MCP surface** (earlier 7-tool reading was a pre-T40 connection — reconnect to see it; proven live by capture B344). No participant/entity field. **Tags are not settable at capture time** and off-ontology tags are dropped — lineage separation runs on a spoken slate + title convention instead. See `docs/tag-convention.md`. CL-side asks route via `docs/agents.md` → captain-swag. |
 | Angel Eye MCP | **Blocked** | No MCP server exists. HTTP API lists sessions by project and returns per-session events. Missing: cross-session query, and decisions (notes 0/2083). |
 | AppyTron recon | **Already done** | `~/dev/ad/apps/appytron/CONTEXT.md` is the recon. See `docs/recon.md`. |
 
