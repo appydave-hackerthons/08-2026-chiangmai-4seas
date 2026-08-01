@@ -324,6 +324,70 @@
   .pill.blocked { background: var(--st-error); }
   .pill.unknown { background: var(--st-pending); color: var(--brand-brown); }
 
+  .pill.said {
+    background: var(--brand-brown); color: var(--brand-near-white);
+  }
+  .pill.inferred {
+    background: none; color: var(--brand-muted);
+    border: 1px solid var(--brand-border);
+  }
+
+  .evidence {
+    display: grid; gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: start;
+  }
+  .ev { background: var(--brand-near-white); border: 1px solid var(--brand-border); }
+  .ev > header {
+    padding: 14px 18px; border-bottom: 1px solid var(--brand-border);
+    background: var(--brand-linen);
+  }
+  .ev > header h3 { font-size: 14px; letter-spacing: .07em; }
+  .ev > header .who {
+    font-family: 'Roboto Mono', monospace; font-size: 11px;
+    color: var(--brand-muted); margin-top: 3px; display: block;
+  }
+  .ev .block { padding: 15px 18px; }
+  .ev .block + .block { border-top: 1px solid var(--brand-border); }
+  .ev .block p { margin: 0 0 9px; font-size: 13.5px; }
+  .ev .block p:last-child { margin-bottom: 0; }
+  .ev .block ul { margin: 0; padding-left: 18px; }
+  .ev .block li { font-size: 13.5px; line-height: 1.55; margin-bottom: 4px; }
+  .ev .block.inf p, .ev .block.inf li { color: var(--brand-muted); }
+
+  .spine-two {
+    display: grid; gap: 0; margin-top: 22px;
+    grid-template-columns: 1fr auto 1fr; align-items: center;
+    border: 1px solid var(--brand-border); background: var(--brand-near-white);
+  }
+  .spine-two .half { padding: 16px 20px; }
+  .spine-two .half h4 { font-size: 12px; letter-spacing: .09em; margin-bottom: 6px; }
+  .spine-two .half p { margin: 0; font-size: 13px; color: var(--brand-muted); }
+  .spine-two .joint {
+    align-self: stretch; display: flex; align-items: center; padding: 0 18px;
+    border-left: 1px solid var(--brand-border);
+    border-right: 1px solid var(--brand-border);
+    background: var(--brand-linen);
+    font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--brand-amber);
+    white-space: nowrap;
+  }
+
+  table.unknowns { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  table.unknowns thead th {
+    font-family: 'Oswald', Arial, sans-serif; font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .1em; color: var(--brand-muted);
+    text-align: left; padding: 0 14px 10px 0;
+  }
+  table.unknowns td {
+    border-top: 1px solid var(--brand-border); padding: 11px 14px 11px 0;
+    font-size: 13.5px; vertical-align: top;
+  }
+  table.unknowns td.owner {
+    font-family: 'Roboto Mono', monospace; font-size: 11.5px;
+    color: var(--brand-muted); white-space: nowrap;
+  }
+  table.unknowns td:first-child { font-weight: 500; }
+
   .roles {
     display: grid; gap: 14px; margin-top: 24px;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -384,6 +448,9 @@
       </button>
       <button class="tab" role="tab" id="tab-order" aria-controls="panel-order" aria-selected="false" tabindex="-1">
         <span class="seq">03</span>Build Order
+      </button>
+      <button class="tab" role="tab" id="tab-ideas" aria-controls="panel-ideas" aria-selected="false" tabindex="-1">
+        <span class="seq">04</span>Lineage One
       </button>
     </div>
   </div>
@@ -734,6 +801,139 @@
         only <strong>three to five runnable apps</strong> and <strong>one</strong> polished
         end-to-end demo. Ten finished applications is not the target, and pretending otherwise is
         the fastest way to lose the event.</p>
+    </div>
+  </section>
+
+  <!-- ================= VIEW 4 ================= -->
+  <section role="tabpanel" id="panel-ideas" aria-labelledby="tab-ideas" tabindex="0" hidden>
+    <p class="eyebrow">Answers — what are we actually building?</p>
+    <h2 class="panel-title">The team interviewed by its own system</h2>
+    <p class="lede">
+      Lineage one is the pilot, and this is its discovery record — evolving, not final.
+      <strong>Said</strong> is what a person actually stated; <strong>inferred</strong> is
+      synthesis on top. Keeping the two apart is the same discipline every participant lineage
+      will be held to.
+    </p>
+
+    <div class="stage">
+      <div class="evidence">
+
+        <div class="ev">
+          <header>
+            <h3>The interviewer co-pilot</h3>
+            <span class="who">ETHON · BUILD SIDE</span>
+          </header>
+          <div class="block">
+            <span class="pill said">Said</span>
+            <p>An always-listening co-pilot for the interviewer. While an interview runs, it
+              surfaces two things:</p>
+            <ul>
+              <li>Useful information from the internet — data relevant to what is being discussed</li>
+              <li>Clarifying questions, proposed by the AI, for the interviewer to ask next</li>
+            </ul>
+            <p style="margin-top:9px"><strong>The problem:</strong> people don't know what they
+              want. A good interviewer can extract needs, or get someone to realise a problem they
+              hadn't named — but not everyone has that skill.</p>
+          </div>
+          <div class="block inf">
+            <span class="pill inferred">Inferred</span>
+            <p>This targets the weakest link in the whole system. The plan already names interview
+              quality as the primary risk, and its diagnostic rule is that weak opportunity cards
+              mean bad questions, not bad scoring.</p>
+            <p>It is also recursive in a way that helps the demo — the tool improves the process
+              that produced it.</p>
+          </div>
+        </div>
+
+        <div class="ev">
+          <header>
+            <h3>Downstream of the interview</h3>
+            <span class="who">KARLEN · HUMAN SIDE</span>
+          </header>
+          <div class="block">
+            <span class="pill said">Said</span>
+            <p>Once there are good questions and a working process for surfacing frictions and
+              pain points, the next problems are:</p>
+            <ul>
+              <li>Document all the frictions and pain points</li>
+              <li>Find patterns within them</li>
+              <li>Generate ideas — by a defined method, not intuition</li>
+              <li><strong>Define what a good idea actually is</strong></li>
+            </ul>
+            <p style="margin-top:9px">A good idea must satisfy the <strong>themes of the
+              hackathon</strong> and the <strong>20-point criteria</strong>. Together those decide
+              which ideas are higher priority, worth building, or not worth building.</p>
+          </div>
+          <div class="block inf">
+            <span class="pill inferred">Inferred</span>
+            <p>This is the plan's opportunity-selection funnel, arrived at independently — a good
+              sign the plan describes something real.</p>
+            <p>The sharpest part is "define what is in fact a good idea". The plan proposes ranking
+              dimensions but never fixes a bar. Karlen is asking for the bar, and correctly places
+              it <em>outside</em> the system.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="spine-two">
+        <div class="half">
+          <h4>Ethon — better evidence in</h4>
+          <p>Live data and clarifying questions, surfaced while the interview is still running.</p>
+        </div>
+        <div class="joint">──▶ handoff ──▶</div>
+        <div class="half">
+          <h4>Karlen — better judgement on it</h4>
+          <p>Patterns, generated ideas, and an external bar: hackathon themes plus the 20-point
+            criteria.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h4>Neither half works alone</h4>
+      <p>A co-pilot feeding richer needs into a pipeline with no defined bar just produces more
+        unranked ideas. A rigorous criteria set applied to thin evidence ranks noise precisely.
+        They have to land together — and because they are owned by different people, <strong>the
+        handoff between them is the thing most likely to break</strong>.</p>
+    </div>
+
+    <h3 style="margin:30px 0 6px; font-size:12.5px; letter-spacing:.11em;">Unknowns — do not invent these</h3>
+    <div class="stage" style="padding-top:22px">
+      <div style="min-width:560px">
+        <table class="unknowns">
+          <thead>
+            <tr><th scope="col">Unknown</th><th scope="col">Owner</th><th scope="col">Why it matters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The 20-point criteria</td>
+              <td class="owner">KARLEN / HACKER FUND</td>
+              <td>Referenced as if it exists; contents not stated. It is half the definition of a good idea</td>
+            </tr>
+            <tr>
+              <td>The hackathon themes</td>
+              <td class="owner">HACKER FUND</td>
+              <td>The other half. An idea can be excellent and still fail the theme test</td>
+            </tr>
+            <tr>
+              <td>Is the co-pilot lineage one's first build?</td>
+              <td class="owner">DAVID + ETHON</td>
+              <td>A tool that improves interviews only pays off while interviews are still happening</td>
+            </tr>
+            <tr>
+              <td>What "always listening" means technically</td>
+              <td class="owner">ETHON</td>
+              <td>Live audio or transcript stream — changes the build entirely, and touches ingestion</td>
+            </tr>
+            <tr>
+              <td>Are suggestions private to the interviewer?</td>
+              <td class="owner">ETHON</td>
+              <td>A participant-visible prompt changes the interview dynamic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
