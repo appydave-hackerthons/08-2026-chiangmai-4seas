@@ -617,14 +617,15 @@
           <h3>The three gates</h3>
           <p class="sub">verified 2026-08-01</p>
 
-          <div class="card cleared">
-            <span class="pill cleared">Cleared · one gap</span>
+          <div class="card partial">
+            <span class="pill partial">Cleared · workaround changed</span>
             <h4>Captain's Log via MCP</h4>
-            <p>Live on :7101. Eight tools confirmed — search, get, stats, set-state, add-note,
-              create, plus composer. Transcripts, tags and time windows all work.
-              <strong>No participant or entity field exists in the data model</strong>, which the
-              five-lineage design assumes. Workaround: tag at capture time — tags are searchable.</p>
-            <span class="weight">Tag convention needed</span>
+            <p>Live on :7101. Search, get, transcripts and time windows all work.
+              <strong>Tags cannot be set at capture time</strong> — the create endpoint takes no
+              tags field, and the enricher drops any tag not in the ontology. Lineage separation
+              therefore runs on a <strong>spoken slate</strong> at the top of each recording, which
+              reaches the synopsis and is findable by keyword. Verified live.</p>
+            <span class="weight">Slate + title convention</span>
           </div>
 
           <div class="card gate">
