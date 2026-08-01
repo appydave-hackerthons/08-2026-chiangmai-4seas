@@ -7,6 +7,41 @@ This is the one authored file in `inbox/` — everything else here is dropped, n
 
 ---
 
+## 2026-08-01 · Micro-apps tab + the whiteboard funnel
+
+Artifact updated, same link: `claude.ai/code/artifact/00f219bf-ac4c-4799-94fb-e70d39acacd5`
+
+**Tab 05 — Micro-Apps.** Splits the portfolio into two kinds, because confusing them is how a
+portfolio ends up with no story:
+
+- **Tools we build FOR the pipeline** — they make a stage work better. `interview-copilot` sits at
+  stage 01, Questions
+- **What the pipeline PRODUCES** — one app per participant lineage, L2 to L5, all still awaiting
+  interviews
+
+The funnel it maps against is transcribed from David's whiteboard photo, not from my abstraction.
+Board photo archived at `raw/2026-08-01-cm4s-l1-board-funnel.jpg`, reading in
+`docs/board-2026-08-01.md`.
+
+### The board gave us a step we didn't have
+
+**Elaborations** — between the fact sheet and the opportunity cards. The plan went from evidence
+straight to candidates; the board widens first. That's the right instinct: the two rows of ~9
+cards drawn beside it are a deliberately large search space, and **you can't narrow well from a set
+that was never wide**.
+
+Three other things the board says that our docs didn't:
+
+- **Judging is its own stage**, not a scoring column — which matches Karlen's ask for a defined bar
+- The **D / E / K lanes run the full height** — ownership is per-stage across the whole funnel, so
+  our "Karlen does discovery, David and Ethan build" split is coarser than what's drawn
+- The funnel narrows **~18 → ~5 → built**, independently matching the plan's three-to-five bar
+
+Uncertain bits are flagged in the doc rather than guessed — including what `HOT` means and whether
+the ①/② marks are two passes or two participants.
+
+---
+
 ## 2026-08-01 · First app repo is live — interview-copilot
 
 **https://github.com/appydave-hackerthons/interview-copilot** — public.

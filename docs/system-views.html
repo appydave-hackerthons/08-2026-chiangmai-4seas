@@ -388,6 +388,74 @@
   }
   table.unknowns td:first-child { font-weight: 500; }
 
+  /* micro-apps view */
+  .apps-rail { min-width: 780px; }
+
+  .phaserow {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    border: 1px solid var(--brand-border); background: var(--brand-near-white);
+  }
+  .phaserow .ph {
+    padding: 12px 10px; border-right: 1px solid var(--brand-border);
+    text-align: center;
+  }
+  .phaserow .ph:last-child { border-right: 0; }
+  .phaserow .ph .n {
+    font-family: 'Roboto Mono', monospace; font-size: 10px;
+    color: var(--brand-amber); display: block; margin-bottom: 3px;
+  }
+  .phaserow .ph h4 { font-size: 11.5px; letter-spacing: .05em; }
+  .phaserow .ph.served { background: var(--brand-linen); }
+
+  .band-label {
+    font-family: 'Oswald', Arial, sans-serif; font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .12em; color: var(--brand-muted);
+    margin: 26px 0 10px; display: block;
+  }
+  .band-label span { color: var(--brand-brown); font-weight: 600; }
+
+  .slotrow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; }
+  .slot { padding: 0 6px; }
+  .tether {
+    height: 20px; border-left: 2px solid var(--brand-amber);
+    margin-left: 50%; position: relative;
+  }
+  .tether::before {
+    content: ""; position: absolute; top: -1px; left: -5px;
+    border: 4px solid transparent; border-bottom-color: var(--brand-amber);
+  }
+
+  .appcard {
+    background: var(--brand-near-white); border: 1px solid var(--brand-border);
+    border-top: 3px solid var(--brand-amber); padding: 12px 13px;
+  }
+  .appcard.ghost {
+    border-top-color: var(--brand-border); border-style: dashed;
+    background: none;
+  }
+  .appcard h4 { font-size: 12px; letter-spacing: .04em; margin-bottom: 5px; }
+  .appcard .mono-id {
+    font-family: 'Roboto Mono', monospace; font-size: 10px;
+    color: var(--brand-muted); display: block; margin-bottom: 6px;
+  }
+  .appcard p { margin: 0; font-size: 11.5px; color: var(--brand-muted); line-height: 1.45; }
+  .appcard.ghost h4 { color: var(--brand-muted); }
+
+  .outputs { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+  table.dossier { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  table.dossier thead th {
+    font-family: 'Oswald', Arial, sans-serif; font-size: 10.5px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .1em; color: var(--brand-muted);
+    text-align: left; padding: 0 14px 10px 0;
+  }
+  table.dossier td {
+    border-top: 1px solid var(--brand-border); padding: 12px 14px 12px 0;
+    font-size: 13px; vertical-align: top;
+  }
+  table.dossier td.nm { font-family: 'Roboto Mono', monospace; font-size: 12px; white-space: nowrap; }
+  table.dossier td.pending { color: var(--brand-muted); font-style: italic; }
+
   .roles {
     display: grid; gap: 14px; margin-top: 24px;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -451,6 +519,9 @@
       </button>
       <button class="tab" role="tab" id="tab-ideas" aria-controls="panel-ideas" aria-selected="false" tabindex="-1">
         <span class="seq">04</span>Lineage One
+      </button>
+      <button class="tab" role="tab" id="tab-apps" aria-controls="panel-apps" aria-selected="false" tabindex="-1">
+        <span class="seq">05</span>Micro-Apps
       </button>
     </div>
   </div>
@@ -930,6 +1001,127 @@
               <td>Are suggestions private to the interviewer?</td>
               <td class="owner">ETHON</td>
               <td>A participant-visible prompt changes the interview dynamic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIEW 5 ================= -->
+  <section role="tabpanel" id="panel-apps" aria-labelledby="tab-apps" tabindex="0" hidden>
+    <p class="eyebrow">Answers — what gets built, and where it plugs in</p>
+    <h2 class="panel-title">Two kinds of app, opposite ends of the funnel</h2>
+    <p class="lede">
+      The funnel below is transcribed from the whiteboard, 1 Aug. Some apps are <strong>tools we
+      build for the pipeline</strong> — they make a stage work better. The rest are
+      <strong>what the pipeline produces</strong>. Confusing the two is how a portfolio ends up
+      with no story.
+    </p>
+
+    <div class="stage">
+      <div class="apps-rail">
+
+        <div class="spine">
+          <div class="step">
+            <span class="seq">01</span>
+            <h3>Questions</h3>
+            <span class="note">List questions · goals</span>
+          </div>
+          <div class="step">
+            <span class="seq">02</span>
+            <h3>Fact Sheet</h3>
+            <span class="note">Evidence, structured</span>
+          </div>
+          <div class="step">
+            <span class="seq">03</span>
+            <h3>Elaborations</h3>
+            <span class="note">Widen before narrowing</span>
+          </div>
+          <div class="step">
+            <span class="seq">04</span>
+            <h3>Op Cards</h3>
+            <span class="note">Two rows — many candidates</span>
+          </div>
+          <div class="step gate">
+            <span class="seq">05</span>
+            <h3>Judge</h3>
+            <span class="note">Themes + 20-point criteria</span>
+          </div>
+          <div class="step">
+            <span class="seq">06</span>
+            <h3>Shortlist</h3>
+            <span class="note">~5 survive · the hot list</span>
+          </div>
+          <div class="step">
+            <span class="seq">07</span>
+            <h3>Build</h3>
+            <span class="note">The apps themselves</span>
+          </div>
+        </div>
+
+        <span class="band-label"><span>Tools we build FOR the pipeline</span> — they improve a stage</span>
+        <div class="slotrow" style="grid-template-columns: repeat(7, 1fr);">
+          <div class="slot">
+            <div class="tether" aria-hidden="true"></div>
+            <div class="appcard">
+              <h4>interview-copilot</h4>
+              <span class="mono-id">CM4S-L1 · ETHAN · PUBLIC</span>
+              <p>Agents co-pilot the live interview — questions to ask, biases to avoid.</p>
+            </div>
+          </div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+        </div>
+
+        <span class="band-label"><span>What the pipeline PRODUCES</span> — one per participant lineage</span>
+        <div class="outputs">
+          <div class="appcard ghost"><h4>Lineage 2</h4><span class="mono-id">CM4S-L2</span><p>Awaiting interview</p></div>
+          <div class="appcard ghost"><h4>Lineage 3</h4><span class="mono-id">CM4S-L3</span><p>Awaiting interview</p></div>
+          <div class="appcard ghost"><h4>Lineage 4</h4><span class="mono-id">CM4S-L4</span><p>Awaiting interview</p></div>
+          <div class="appcard ghost"><h4>Lineage 5</h4><span class="mono-id">CM4S-L5</span><p>Awaiting interview</p></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout">
+      <h4>What the board added that we didn't have</h4>
+      <p><strong>Elaborations</strong> — a step between the fact sheet and the opportunity cards.
+        The plan went straight from evidence to candidates; the board widens first. That matters,
+        because the two rows of cards drawn beside it are a deliberately large search space, and
+        you can't narrow well from a set that was never wide.</p>
+    </div>
+
+    <h3 style="margin:30px 0 6px; font-size:12.5px; letter-spacing:.11em;">The dossiers</h3>
+    <p class="lede" style="margin-bottom:16px">
+      One file per app in <code>docs/apps/</code>, same shape every time — Karlen's presentation
+      source. <strong>Stack is never guessed</strong>; an unread repo says pending.
+    </p>
+    <div class="stage" style="padding-top:22px">
+      <div style="min-width:620px">
+        <table class="dossier">
+          <thead>
+            <tr><th scope="col">App</th><th scope="col">Owner</th><th scope="col">Stack</th><th scope="col">Status</th><th scope="col">Serves</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="nm">interview-copilot</td>
+              <td>Ethan</td>
+              <td class="pending">pending — repo has a README only</td>
+              <td>Repo live, no code</td>
+              <td>Stage 01 · Questions</td>
+            </tr>
+            <tr>
+              <td class="nm pending">— L2…L5</td>
+              <td class="pending">participants</td>
+              <td class="pending">pending</td>
+              <td class="pending">awaiting interviews</td>
+              <td class="pending">Stage 07 · output</td>
             </tr>
           </tbody>
         </table>
