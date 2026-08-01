@@ -7,6 +7,41 @@ This is the one authored file in `inbox/` — everything else here is dropped, n
 
 ---
 
+## 2026-08-01 · Ethan shipped the MVP — stack now known
+
+`interview-copilot` commit `e621b69`, ~4,500 lines. Backend, frontend, tests, Makefile.
+
+**Stack:** Python 3.11+ / FastAPI / uvicorn / pydantic v2, packaged with `uv`. React 19 +
+TypeScript 5.9 + Vite 7, plain CSS, no UI framework. Agent runtime is **opencode** on
+`openai/gpt-5.6-sol`. pytest + pytest-asyncio.
+
+**Five specialist lenses** read one shared evidence pool: Clarification · Opportunity · Bias guard ·
+Memory · Research.
+
+Two decisions worth knowing:
+
+- **Every agent tool is disabled** in `opencode.json` — bash, edit, write, read, web, all `false`.
+  The lenses reason over the transcript and can touch nothing else. For a tool listening to a
+  stranger's interview that is a deliberate, good call
+- **One bounded model call per cycle, not five** — lenses keep explicit attribution while sharing a
+  call, and can fan out later without changing the frontend or the evidence model
+
+### His MVP doc independently lands on our evidence rule
+
+> *"Agent suggestions are not facts until pinned, and remain labelled as agent material after
+> pinning."* · *"External claims require a real URL… propose a search rather than fabricate a
+> result."*
+
+That is our said-versus-inferred split, written by someone who hadn't read our docs. **Two
+independent arrivals at the same rule is the strongest signal we have that it's right.**
+
+Dossier at `docs/apps/interview-copilot.md` — stack and why-this-stack filled from the manifests,
+with inferred rows marked so nobody puts a guess on a slide.
+
+**A 15-minute pull loop is now running** on both repos, reporting changes as they land.
+
+---
+
 ## 2026-08-01 · Micro-apps tab + the whiteboard funnel
 
 Artifact updated, same link: `claude.ai/code/artifact/00f219bf-ac4c-4799-94fb-e70d39acacd5`
