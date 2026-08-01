@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Interview Copilot — Hackathon Story Arc</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; }
+  .slide { width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8vw; scroll-snap-align: start; }
+  .slides { scroll-snap-type: y mandatory; height: 100vh; overflow-y: scroll; }
+  h1 { font-size: 3.5vw; line-height: 1.2; margin-bottom: 1.5vw; }
+  h2 { font-size: 2.5vw; line-height: 1.3; margin-bottom: 1vw; }
+  p { font-size: 1.8vw; line-height: 1.6; max-width: 60vw; }
+  .small { font-size: 1.2vw; color: #666; }
+  .label { font-size: 0.9vw; text-transform: uppercase; letter-spacing: 0.15vw; color: #999; margin-bottom: 0.8vw; }
+  .accent { color: #0a8f6c; }
+  .pipeline { display: flex; align-items: center; gap: 0; margin-top: 2vw; flex-wrap: wrap; }
+  .pipe-step { background: #f0f7f5; padding: 1vw 1.5vw; border-radius: 0.5vw; font-size: 1.1vw; font-weight: 600; }
+  .pipe-arrow { font-size: 1.5vw; color: #0a8f6c; margin: 0 0.3vw; }
+  .criteria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; margin-top: 2vw; }
+  .criterion { padding: 1.5vw; border-left: 4px solid #0a8f6c; }
+  .criterion h3 { font-size: 1.5vw; margin-bottom: 0.5vw; }
+  .criterion p { font-size: 1.2vw; }
+  ul { margin-top: 1vw; }
+  li { font-size: 1.5vw; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="slides">
+
+<!-- SLIDE 1: Hook -->
+<div class="slide">
+  <div class="label">What we built</div>
+  <h1>A <span class="accent">Dynamic Interview Copilot</span></h1>
+  <p>A real-time AI guide that helps problem solvers conduct better customer interviews — even if they've never done customer development before.</p>
+  <p class="small" style="margin-top: 2vw;">Nimman Hackathon · August 2026 · Chiang Mai</p>
+</div>
+
+<!-- SLIDE 2: The Problem -->
+<div class="slide">
+  <div class="label">The problem</div>
+  <h2>Problem solvers <span class="accent">don't know how to ask</span></h2>
+  <ul>
+    <li>They know the themes — wellness, connection, community</li>
+    <li>But they don't know the <strong>right questions</strong> to uncover real needs</li>
+    <li>They miss <strong>insights, pain points, and workarounds</strong></li>
+    <li>They mistake opinions for evidence</li>
+    <li>They leave interviews with thin notes and no clear path forward</li>
+  </ul>
+</div>
+
+<!-- SLIDE 3: The Solution -->
+<div class="slide">
+  <div class="label">The solution</div>
+  <h2>A copilot that <span class="accent">listens, extracts, and guides</span></h2>
+  <p>The copilot runs alongside the interviewer in real time:</p>
+  <ul>
+    <li>Transcribes the conversation live</li>
+    <li>Surfaces the <strong>right next question</strong> based on what was just said</li>
+    <li>Extracts <strong>insights, pain points, frictions, and workarounds</strong></li>
+    <li>Structures everything into a shared evidence pool</li>
+    <li>The human stays in control — the AI handles the cognitive load</li>
+  </ul>
+</div>
+
+<!-- SLIDE 4: The Pipeline -->
+<div class="slide">
+  <div class="label">The pipeline</div>
+  <h2>From interview to <span class="accent">scored ideas</span></h2>
+  <div class="pipeline">
+    <div class="pipe-step">Interview</div><div class="pipe-arrow">→</div>
+    <div class="pipe-step">Insights</div><div class="pipe-arrow">→</div>
+    <div class="pipe-step">JTBD Opportunities</div><div class="pipe-arrow">→</div>
+    <div class="pipe-step">Ideas</div><div class="pipe-arrow">→</div>
+    <div class="pipe-step">Scored (Real / New / Good / Feasible)</div><div class="pipe-arrow">→</div>
+    <div class="pipe-step">Best → Prototype</div><div class="pipe-arrow">→</div>
+    <div class="pipe-step">Feedback loop</div>
+  </div>
+  <p style="margin-top: 2vw;" class="small">Each interview produces structured evidence. Insights become opportunities. Opportunities become ideas. Ideas are scored against the judging criteria. The best one gets built — then validated with the person you interviewed.</p>
+</div>
+
+<!-- SLIDE 5: The Demo -->
+<div class="slide">
+  <div class="label">Live demo</div>
+  <h2>See it <span class="accent">in action</span></h2>
+  <p>[Live demo: run a real interview with the copilot. Show it extracting insights in real time. Show the end-of-interview report. Show the scored ideas.]</p>
+  <p class="small" style="margin-top: 2vw;">The copilot is built with Whisper for local transcription, FastAPI backend, React frontend, and multi-lens AI analysis.</p>
+</div>
+
+<!-- SLIDE 6: The Judging Criteria -->
+<div class="slide">
+  <div class="label">How we scored our ideas</div>
+  <h2>Scored against <span class="accent">the criteria</span></h2>
+  <div class="criteria-grid">
+    <div class="criterion">
+      <h3>Real</h3>
+      <p>Every insight comes from a real interview with a real person. We didn't guess — we asked.</p>
+    </div>
+    <div class="criterion">
+      <h3>New</h3>
+      <p>The copilot itself is original — multi-lens analysis in real time, shared evidence pool, human-in-the-loop.</p>
+    </div>
+    <div class="criterion">
+      <h3>Good</h3>
+      <p>Directly creates value for the people we interviewed — helps them find solutions to their own stuck points.</p>
+    </div>
+    <div class="criterion">
+      <h3>Feasible</h3>
+      <p>Already working locally. Can be extended to any theme, any city, any problem. The factory repeats.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: The Close -->
+<div class="slide">
+  <div class="label">What comes next</div>
+  <h2>This isn't just for <span class="accent">Chiang Mai</span></h2>
+  <p>Run the copilot on a different theme. A different city. A different problem.</p>
+  <p style="margin-top: 1vw;">Interview → Insights → Ideas → Scored → Built → Validated.</p>
+  <p style="margin-top: 2vw; font-weight: 600;">The factory repeats. The copilot stays.</p>
+  <p class="small" style="margin-top: 3vw;">Built at the Nimman Hackathon · Chiang Mai · August 2026</p>
+</div>
+
+</div>
+</body>
+</html>
