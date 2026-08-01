@@ -1,2 +1,6 @@
 *.tmp
 
+
+# rendered video — regenerable from the beat sheet + composition
+video/**/output.mp4
+video/_renders/
