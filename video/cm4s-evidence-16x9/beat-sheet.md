@@ -14,8 +14,14 @@ time."*
 
 ## The compression
 
-20 minutes of real interview → 9.8 seconds of screen time. The header clock is the honest scale
+20 minutes of real interview → 9.4 seconds of screen time. The header clock is the honest scale
 marker: it runs `00:00 → 20:00` while the two feeds fill. Everything on screen is real data.
+
+Each transcript row appears at the *same* `elapsed / 1200` mapping the clock uses, so a row's
+timestamp never runs ahead of the clock above it. The 15 turns are picked evenly across the 1200 s
+for that reason — proportional timing plus clustered picks would have produced a burst and a lull.
+Evidence cards are spaced evenly instead: with `source_turn_ids` empty there is no turn to sync
+them to, so pretending to would be inventing lineage.
 
 ## Known limitation, designed around
 
@@ -44,9 +50,9 @@ SAID / INFERRED provenance pill from `DESIGN.md` §2.
 | Time | What happens | Why | On screen |
 |---|---|---|---|
 | **0.0–0.9** | Cream canvas. Header rule draws left→right. Logo chip fades in. Three panel columns fade up **empty**. | Establish the surface as a *tool*, not a slide. Empty is the point — the value is what fills it. | Chip · `CM4S-L2 · REPORT 001 · CHIANG MAI LIFESTYLE` · clock `00:00 / 20:00` |
-| **0.9–1.6** | Column headers land staggered: TRANSCRIPT / EVIDENCE BASE / COVERAGE. Counters read `0`, `0 / 45`, `0 of 6`. | Name the three things before they move, so the eye knows where to look for the next 10 s. | Oswald caps + gold hairlines; six coverage rows sit pending (`--st-pending`) |
-| **1.6–11.4** | **THE RUN.** Clock counts `00:00 → 20:00`; gold progress rule fills. 15 real transcript turns stream into the left column, the stack translating up as it overflows. 10 real evidence cards materialise on the right in waves (scale 0.94→1, `back.out(1.4)`). The `n / 45` counter climbs. Four of the six coverage bars sweep to complete. | The whole video. Left is *input*, right is *what the system made of it*, centre column is the transformation happening at interview speed. Nothing here is a mock — every string is from the JSON. | See card order below |
-| **11.4–12.5** | **LAND.** Last card settles. Coverage summary pops to **4 of 6**; the two unmet phases stay visibly open in `--st-pending`. Score chip counts to **67** and holds. | The honest ending. A demo that lands on 6/6 is a mock; landing on 4/6 with two named gaps is the product telling the truth about its own coverage. | `4 of 6 phases` · `SCORE 67` · rows 01 and 06 still hollow |
+| **0.9–1.6** | Column headers land staggered: TRANSCRIPT / EVIDENCE BASE / COVERAGE. Six coverage rows arrive hollow; the meter block arrives live at `0 of 6`, score `—`. | Name the three things before they move, so the eye knows where to look for the next 10 s. The meter is up from the start on purpose — it is the only panel that must be readable the whole way through, and it stops the bottom-right quadrant sitting empty for eleven seconds. | Oswald caps + gold hairlines; `0 / 45 items`; `0 of 6 phases covered` |
+| **1.6–11.4** | **THE RUN.** Clock counts `00:00 → 20:00`; gold progress rule fills. 15 real transcript turns stream into the left column, the stack translating up as it overflows. 10 real evidence cards materialise on the right in waves (scale 0.94→1, `back.out(1.4)`). The `n / 45` counter climbs. Four of the six coverage bars sweep to complete, and the meter ticks `0 → 1 → 2 → 3 → 4 of 6` behind them. | The whole video. Left is *input*, right is *what the system made of it*, centre column is the transformation happening at interview speed. Nothing here is a mock — every string is from the JSON. | See card order below |
+| **11.4–12.5** | **LAND.** Last card settles. The meter pulses and holds on **4 of 6**; the two unmet phases stay visibly open in `--st-pending`. Score counts to **67** and holds under a yellow bar. | The honest ending. A demo that lands on 6/6 is a mock; landing on 4/6 with two named gaps is the product telling the truth about its own coverage. | `4 of 6 phases` · `REPORT SCORE 67` · rows 01 and 06 still hollow |
 | **12.5–15.0** | **CLAIM.** A cream veil at 0.92 fades over the console — the finished evidence base ghosts through it. Headline + subline rise; the AppyDave dark chip sits under them. | Say the thesis once, over the proof, not instead of it. | *"20 minutes of interview. 45 pieces of evidence."* / *"Built while the conversation was still happening."* |
 
 ## Card order — real items, real arc

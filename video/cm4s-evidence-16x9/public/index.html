@@ -261,7 +261,7 @@
       <div class="col" id="col-coverage">
         <div class="col-head">
           <div class="col-title">Coverage</div>
-          <div class="col-count">6 phases</div>
+          <div class="col-count">6 criteria</div>
         </div>
         <div class="col-hair"></div>
         <div class="col-body">
@@ -398,7 +398,7 @@
           summary.appendChild(el('div', 's-hair'));
           var big = el('div'); big.id = 'cov-big'; big.textContent = '0 of 6';
           summary.appendChild(big);
-          summary.appendChild((function () { var n = el('div', null, 'Phases covered'); n.id = 'cov-lab'; return n; })());
+          summary.appendChild((function () { var n = el('div', null, 'Criteria met'); n.id = 'cov-lab'; return n; })());
           var sb = el('div'); sb.id = 'score-block';
           sb.appendChild((function () { var n = el('div', null, 'Report score'); n.id = 'score-lab'; return n; })());
           var sn = el('div'); sn.id = 'score-num'; sn.textContent = '—';
