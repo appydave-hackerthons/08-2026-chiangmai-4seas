@@ -55,9 +55,16 @@ unblocks phase 05.
 ## Layout
 
 ```
-raw/    unprocessed intake — verbatim, read it, don't treat it as truth
-docs/   recon.md (the three scaffolds) · system-views.html (the artifact)
+raw/     unprocessed intake — verbatim, read it, don't treat it as truth
+inbox/   the temporal stream — logs arriving during the event (see inbox/README.md)
+         ├── captains-log/        conversations streaming out of Captain's Log
+         └── dev-logs/            one folder per builder: appydave/ · ethon/
+docs/    recon.md · tag-convention.md · plugin-plan.md · system-views.html (the artifact)
 ```
+
+`raw/` is stable source material; `inbox/` is a feed that accumulates and gets consumed. Inbox
+filenames are `<date>-<lineage>-<source>-<slug>.<ext>`, all kebab, date first — the lineage
+segment (`cm4s-l1`…`cm4s-l5`) is what makes a flat drop folder queryable.
 
 `docs/system-views.html` is published as an artifact and **must be kept current** — republish it
 whenever the team, gates, or plan change.
