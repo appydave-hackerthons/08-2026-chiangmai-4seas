@@ -52,22 +52,30 @@ From one real 20-minute interview
 
 
 ================================================================================
-2 · THE STORY DECK
+2 · THE STORY DECK  ← START HERE
 ================================================================================
 
-Seven-slide hackathon presentation, keyboard navigable.
-Includes the ProofPass opportunity card, scored 18/20 against the judging
-criteria.
+Dynamic Interview Copilot — Hackathon Story Arc
+  https://claude.ai/code/artifact/13b72de4-f6aa-42ba-b64e-3a66824d24ab
 
-In the repository
-  story-deck-standalone.html    (self-contained, images embedded — use this one)
-  story-deck.html               (working version)
+Nine slides, keyboard navigable — use the arrow keys.
+
+  1  What we built ................ Dynamic Interview Copilot
+  2  The problem .................. Problem solvers don't know how to ask
+  3  The solution ................. A copilot that listens, extracts, guides
+  4  What it produces ............. From one interview, an insight report
+  5  The pipeline ................. From interview to scored ideas
+  6  The top idea ................. ProofPass — 18/20
+  7  Live demo .................... See it in action
+  8  How we scored ................ Real · New · Good · Feasible
+  9  What comes next .............. This isn't just for Chiang Mai
 
 Built by
   Karlen
 
-  [ ] TODO — publish the standalone deck to a shareable URL and add it here.
-      A local file path is not a link an organiser can open.
+Also in the repository
+  story-deck-standalone.html    self-contained, images embedded
+  story-deck.html               working version
 
 
 ================================================================================
@@ -124,8 +132,9 @@ The first thing it built was a better version of its own first step.
 OPEN ITEMS
 ================================================================================
 
-  [ ] Share every artifact link above (see the warning at the top)
-  [ ] Publish the story deck to a URL and add it to section 2
+  [ ] Share every artifact link above (see the warning at the top).
+      Six links need sharing: story deck, workspace, report, system views,
+      design system, interview card.
   [ ] Decide what stays public: both repositories are PUBLIC and contain a
       participant's full interview transcript. That participant has not agreed
       to publication. Either make the repos private or redact the transcripts

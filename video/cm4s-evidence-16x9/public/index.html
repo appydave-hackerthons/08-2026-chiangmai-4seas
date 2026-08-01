@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Local woff2 only — the renderer's CSP blocks font CDNs. */
+      @font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Oswald'; src: url('fonts/Oswald-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
+      @font-face { font-family: 'Oswald'; src: url('fonts/Oswald-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+      @font-face { font-family: 'Roboto'; src: url('fonts/Roboto-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Roboto'; src: url('fonts/Roboto-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+      @font-face { font-family: 'Roboto Mono'; src: url('fonts/RobotoMono-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Roboto Mono'; src: url('fonts/RobotoMono-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+
+      /* Source of truth: CM4S DESIGN.md → a projection of AppyDave. Do not invent values here.
+         All twelve palette tokens are declared even where unused — an undefined custom property
+         renders as invisible text. Light-first, pinned: no prefers-color-scheme, no data-theme. */
+      :root {
+        color-scheme: light;
+        --brand-brown:        #342d2d;
+        --brand-gold:         #ccba9d;
+        --brand-yellow:       #ffde59;
+        --brand-amber:        #c8841a;
+        --brand-muted:        #7a6e5e;
+        --brand-near-white:   #faf5ec;
+        --brand-surface:      #f0ebe4;
+        --brand-linen:        #e8e0d4;
+        --brand-border:       #d4cdc4;
+        --brand-chrome:       #1a1515;
+        --brand-dark-surface: #25201e;
+        --brand-blue:         #2E91FC;
+        --st-complete: #22c55e;
+        --st-active:   #16a34a;
+        --st-error:    #dc2626;
+        --st-pending:  #b8a070;
+      }
+
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0; width: 100%; height: 100%;
+        overflow: hidden; background: var(--brand-near-white);
+        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--brand-near-white); }
+
+      /* ── header ───────────────────────────────────────────────────────── */
+      #header { position: absolute; left: 0; top: 0; width: 1920px; height: 104px; }
+      #logo-chip {
+        position: absolute; left: 64px; top: 26px; height: 52px;
+        display: flex; align-items: center; padding: 0 18px;
+        background: var(--brand-dark-surface); border-radius: 6px;
+        font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1.5px; line-height: 1;
+      }
+      #logo-chip .appy { color: var(--brand-gold); }
+      #logo-chip .dave { color: var(--brand-yellow); }
+      #meta {
+        position: absolute; left: 254px; top: 42px;
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 20px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--brand-muted);
+      }
+      #clock-wrap { position: absolute; right: 64px; top: 34px; text-align: right; }
+      #clock {
+        font-family: 'Roboto Mono', ui-monospace, monospace; font-weight: 700;
+        font-size: 36px; line-height: 1; color: var(--brand-brown); font-variant-numeric: tabular-nums;
+      }
+      #clock .of { font-weight: 400; font-size: 24px; color: var(--brand-muted); }
+      #rule-track {
+        position: absolute; left: 64px; top: 98px; width: 1792px; height: 3px;
+        background: var(--brand-border); border-radius: 2px; overflow: hidden;
+      }
+      #rule-fill { display: block; width: 100%; height: 3px; background: var(--brand-gold); transform-origin: 0% 50%; }
+
+      /* ── columns ──────────────────────────────────────────────────────── */
+      .col { position: absolute; top: 140px; height: 876px; }
+      #col-transcript { left: 64px;   width: 720px; }
+      #col-evidence   { left: 816px;  width: 620px; }
+      #col-coverage   { left: 1468px; width: 388px; }
+
+      .col-head { position: relative; width: 100%; height: 46px; display: flex; align-items: baseline; justify-content: space-between; }
+      .col-title {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 22px; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-brown);
+      }
+      .col-count {
+        font-family: 'Roboto Mono', ui-monospace, monospace; font-weight: 400;
+        font-size: 18px; color: var(--brand-muted); font-variant-numeric: tabular-nums;
+      }
+      .col-hair { position: relative; width: 100%; height: 2px; background: var(--brand-gold); border-radius: 1px; transform-origin: 0% 50%; }
+      .col-body { position: relative; width: 100%; height: 814px; margin-top: 14px; overflow: hidden; }
+      .stack { position: absolute; left: 0; top: 0; width: 100%; }
+
+      /* ── transcript rows ──────────────────────────────────────────────── */
+      .turn {
+        position: relative; width: 100%; height: 100px; margin-bottom: 16px;
+        padding-left: 20px; border-left: 3px solid var(--brand-border); opacity: 0;
+      }
+      .turn .t-meta { display: flex; align-items: baseline; gap: 14px; height: 22px; }
+      .turn .t-time {
+        font-family: 'Roboto Mono', ui-monospace, monospace; font-weight: 700; font-size: 17px;
+        color: var(--brand-muted); font-variant-numeric: tabular-nums;
+      }
+      .turn .t-who {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 500;
+        font-size: 14px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brand-muted);
+      }
+      .turn .t-id {
+        margin-left: auto; font-family: 'Roboto Mono', ui-monospace, monospace; font-size: 14px; color: var(--brand-border);
+      }
+      .turn .t-text {
+        margin-top: 8px; height: 68px; overflow: hidden;
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; font-weight: 400;
+        font-size: 24px; line-height: 1.42; color: var(--brand-brown);
+      }
+
+      /* ── evidence cards ───────────────────────────────────────────────── */
+      .ecard {
+        position: relative; width: 100%; height: 186px; margin-bottom: 16px; padding: 18px 20px;
+        background: var(--brand-surface); border: 1px solid var(--brand-border); border-radius: 10px;
+        opacity: 0;
+      }
+      .ecard .e-head { display: flex; align-items: baseline; justify-content: space-between; height: 22px; }
+      .ecard .e-type {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 16px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brand-brown);
+      }
+      .ecard .e-conf {
+        font-family: 'Roboto Mono', ui-monospace, monospace; font-size: 15px; color: var(--brand-muted); font-variant-numeric: tabular-nums;
+      }
+      .ecard .e-body {
+        margin-top: 10px; height: 88px; overflow: hidden;
+        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; font-weight: 400;
+        font-size: 21px; line-height: 1.4;
+      }
+      .ecard.said     .e-body { color: var(--brand-brown); }
+      .ecard.inferred .e-body { color: var(--brand-muted); }
+      .ecard .e-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; height: 24px; }
+      .ecard .e-prov {
+        display: inline-block; border-radius: 999px; padding: 4px 13px 3px;
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 13px; letter-spacing: 2px; text-transform: uppercase; line-height: 1;
+      }
+      .ecard.said     .e-prov { background: var(--brand-brown); color: var(--brand-near-white); border: 1px solid var(--brand-brown); }
+      .ecard.inferred .e-prov { background: transparent; color: var(--brand-muted); border: 1px solid var(--brand-border); }
+      .ecard .e-id { font-family: 'Roboto Mono', ui-monospace, monospace; font-size: 14px; color: var(--brand-muted); }
+
+      /* ── coverage rows ────────────────────────────────────────────────── */
+      .crow { position: relative; width: 100%; margin-bottom: 22px; opacity: 0; }
+      .crow .c-top { display: flex; align-items: flex-start; gap: 12px; height: 48px; }
+      .crow .c-ord {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 20px; line-height: 1.15; color: var(--brand-amber); width: 30px; flex: none;
+      }
+      .crow .c-name {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 500;
+        font-size: 18px; line-height: 1.28; letter-spacing: 0.6px; text-transform: uppercase; color: var(--brand-brown);
+        overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      }
+      .crow.pending .c-name { color: var(--brand-muted); }
+      .crow .c-track { position: relative; width: 100%; height: 7px; margin-top: 6px; background: var(--brand-linen); border-radius: 4px; overflow: hidden; }
+      .crow .c-fill { display: block; width: 100%; height: 7px; background: var(--st-complete); border-radius: 4px; transform-origin: 0% 50%; transform: scaleX(0); }
+
+      #cov-summary { position: relative; width: 100%; margin-top: 6px; opacity: 0; }
+      #cov-summary .s-hair { width: 100%; height: 2px; background: var(--brand-border); border-radius: 1px; margin-bottom: 22px; }
+      #cov-big {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 66px; line-height: 1; color: var(--brand-brown);
+      }
+      #cov-lab {
+        margin-top: 6px; font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 500;
+        font-size: 15px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--brand-muted);
+      }
+      #score-block { margin-top: 30px; }
+      #score-lab {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 14px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--brand-muted); margin-bottom: 4px;
+      }
+      #score-num {
+        font-family: 'Roboto Mono', ui-monospace, monospace; font-weight: 700;
+        font-size: 56px; line-height: 1.05; color: var(--brand-brown); font-variant-numeric: tabular-nums;
+      }
+      /* Yellow is reserved. It appears exactly twice: the "Dave" half of the wordmark, and here. */
+      #score-bar { display: block; width: 132px; height: 8px; margin-top: 8px; background: var(--brand-yellow); border-radius: 4px; transform-origin: 0% 50%; transform: scaleX(0); }
+
+      /* ── claim overlay ────────────────────────────────────────────────── */
+      #veil { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: var(--brand-near-white); opacity: 0; }
+      #claim {
+        position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 220px; opacity: 0;
+      }
+      #claim-kicker {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 20px; letter-spacing: 7px; text-transform: uppercase; color: var(--brand-muted); margin-bottom: 30px;
+      }
+      #claim-head {
+        max-width: 1280px; text-align: center;
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+        font-size: 86px; line-height: 1.06; letter-spacing: 0.5px; text-transform: uppercase; color: var(--brand-brown);
+      }
+      #claim-rule { width: 180px; height: 4px; background: var(--brand-border); border-radius: 2px; margin: 34px 0 30px; transform-origin: 50% 50%; }
+      #claim-sub {
+        max-width: 1080px; text-align: center;
+        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; font-weight: 400;
+        font-size: 34px; line-height: 1.35; color: var(--brand-muted);
+      }
+      #claim-chip {
+        margin-top: 52px; display: flex; align-items: center; height: 66px; padding: 0 24px;
+        background: var(--brand-dark-surface); border-radius: 8px;
+        font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 2px; line-height: 1;
+      }
+      #claim-chip .appy { color: var(--brand-gold); }
+      #claim-chip .dave { color: var(--brand-yellow); }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="cm4s-evidence"
+      data-start="0"
+      data-duration="15"
+      data-fps="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- ── header ──────────────────────────────────────────────────── -->
+      <div id="header">
+        <div id="logo-chip"><span class="appy">Appy</span><span class="dave">Dave</span></div>
+        <div id="meta">CM4S-L2 &middot; Report 001 &middot; Chiang Mai Lifestyle</div>
+        <div id="clock-wrap">
+          <div id="clock"><span id="clock-now">00:00</span><span class="of"> / 20:00</span></div>
+        </div>
+        <div id="rule-track"><span id="rule-fill"></span></div>
+      </div>
+
+      <!-- ── transcript ──────────────────────────────────────────────── -->
+      <div class="col" id="col-transcript">
+        <div class="col-head">
+          <div class="col-title">Transcript</div>
+          <div class="col-count">157 turns</div>
+        </div>
+        <div class="col-hair"></div>
+        <div class="col-body"><div class="stack" id="turn-stack"></div></div>
+      </div>
+
+      <!-- ── evidence ────────────────────────────────────────────────── -->
+      <div class="col" id="col-evidence">
+        <div class="col-head">
+          <div class="col-title">Evidence base</div>
+          <div class="col-count"><span id="ev-count">0</span> / 45 items</div>
+        </div>
+        <div class="col-hair"></div>
+        <div class="col-body"><div class="stack" id="card-stack"></div></div>
+      </div>
+
+      <!-- ── coverage ────────────────────────────────────────────────── -->
+      <div class="col" id="col-coverage">
+        <div class="col-head">
+          <div class="col-title">Coverage</div>
+          <div class="col-count">6 phases</div>
+        </div>
+        <div class="col-hair"></div>
+        <div class="col-body">
+          <div class="stack" id="cov-stack"></div>
+        </div>
+      </div>
+
+      <!-- ── claim (paints last = on top) ────────────────────────────── -->
+      <div id="veil"></div>
+      <div id="claim">
+        <div id="claim-kicker">Chiang Mai 4 Seasons &middot; CM4S-L2</div>
+        <div id="claim-head">20 minutes of interview. 45 pieces of evidence.</div>
+        <div id="claim-rule"></div>
+        <div id="claim-sub">Built while the conversation was still happening.</div>
+        <div id="claim-chip"><span class="appy">Appy</span><span class="dave">Dave</span></div>
+      </div>
+
+      <script src="vendor/gsap.min.js"></script>
+      <script>
+        (function () {
+          /* ═══ DATA — verbatim from
+             reports/2026-08-01-cm4s-l2-report-001-chiang-mai-lifestyle-v2.json
+             Nothing below is invented. Text is trimmed only where marked with an ellipsis. ═══ */
+
+          // 15 of 157 turns, evenly spread across the 1200s so the row timestamps track the header clock.
+          // The JSON labels every turn "Participant" — including interviewer lines — so we label them
+          // exactly as the data does rather than guessing who spoke.
+          var TURNS = [
+            ['turn-3',    21, 'Okay, tell me what the last activity you consider joining in Chiang Mai.'],
+            ['turn-13',   91, 'Of course, I get the peaceful, and of course, I get a lot of beautiful pictures.'],
+            ['turn-25',  175, 'is something like a food festival. Okay, so tell me the story about that. Okay, I want you to remember the story.'],
+            ['turn-37',  259, 'the cultural or the lifestyle or the way of life of the Japanese people, something like that.'],
+            ['turn-47',  329, 'Okay, I think I see enough. Did that change anything about the next time you were looking for an event?'],
+            ['turn-57',  399, "that you want to go where you tell him to go first. I don't want to waste my time. So let them go."],
+            ['turn-67',  469, 'And what’s your goal or your expectation to go to this event?'],
+            ['turn-79',  553, 'My friends. Some of them say the same thing. They say the same thing. Yes, they have a problem.'],
+            ['turn-91',  637, 'When you want to meet, is meeting locals or meeting nomads something that’s important to you? Yes.'],
+            ['turn-100', 700, 'So do you find that you have enough opportunities to meet?'],
+            ['turn-112', 784, 'What are you missing? The failing of the tourist.'],
+            ['turn-122', 854, 'That’s what you want to do. But let’s say you have 20 experiences of the next six months.'],
+            ['turn-134', 938, 'And you come and you see a great experience, maybe there’s a festival on next week, you know it’s going to be on.'],
+            ['turn-144',1008, 'and the story of that tambourine or that village, something like that.'],
+            ['turn-155',1085, 'Thank you. Well, thanks. I think that’s all the time we have for this interview.']
+          ];
+
+          // 10 of 45 evidence items. `source_turn_ids` is EMPTY on all 45, so no card claims a link
+          // back to a turn — they land alongside the transcript, never wired to it. The one lineage
+          // the data DOES support is `source`: transcript = SAID, agent = INFERRED (DESIGN.md §2).
+          var CARDS = [
+            ['report-1-quote-01',  'Quote',   'said',     0.94, '“It makes me more relaxed and also for praying. And also I love to take a picture.”'],
+            ['report-1-fact-01',   'Fact',    'inferred', 0.84, 'The participant visits Chiang Mai temples for relaxation, prayer, and photography.'],
+            ['report-1-quote-03',  'Quote',   'said',     0.94, '“But it’s kind of like, it’s not look like what they said.”'],
+            ['report-1-pain-02',   'Pain',    'inferred', 0.82, 'The Japanese festival’s performances felt contemporary rather than representative of the everyday life or authentic culture the participant expected.'],
+            ['report-1-quote-04',  'Quote',   'said',     0.94, '“I feel that I shouldn’t waste my time to be here.”'],
+            ['report-1-fact-14',   'Fact',    'inferred', 0.84, 'They will not attend when the promotional post or image appears AI-generated.'],
+            ['report-1-quote-05',  'Quote',   'said',     0.94, '“So I just let somebody else go there first.”'],
+            ['report-1-pain-07',   'Pain',    'inferred', 0.82, 'The participant relies on a friend to assume the risk of attending first, creating a slow and socially costly workaround.'],
+            ['report-1-fact-12',   'Fact',    'inferred', 0.84, 'The participant does not attend many events, describes themselves as selective, and considers approximately one event a month sufficient.'],
+            ['report-1-insight-01','Insight', 'inferred', 0.66, 'Selective, time-constrained event seekers may value a lightweight credibility layer showing recent, real attendee evidence and a clear comparison between advertised and actual experiences.']
+          ];
+
+          // coverage[] labels condensed to their template.phases[] names; `met` is verbatim from the JSON.
+          var COVERAGE = [
+            ['01', 'Recent context & desired outcome', false],
+            ['02', 'Underlying why',                   true ],
+            ['03', 'Current reality',                  true ],
+            ['04', 'Expectation gap',                  true ],
+            ['05', 'Friction & attempts',              true ],
+            ['06', 'Consequence & priority',           false]
+          ];
+
+          /* ═══ TIMING ═══ */
+          var RUN_IN = 1.8, RUN_OUT = 11.2, INTERVIEW = 1200;
+          var TURN_PITCH = 116, TURN_VIEW = 814;   // 100px row + 16px gap
+          var CARD_PITCH = 202, CARD_VIEW = 814;   // 186px card + 16px gap
+          var COV_FILL_AT = [null, 3.6, 5.4, 7.2, 9.0, null];
+
+          /* ═══ DOM (built synchronously — the renderer samples after load) ═══ */
+          function el(tag, cls, txt) {
+            var n = document.createElement(tag);
+            if (cls) n.className = cls;
+            if (txt !== undefined) n.textContent = txt;
+            return n;
+          }
+          function mmss(s) {
+            var m = Math.floor(s / 60), r = Math.floor(s % 60);
+            return (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r;
+          }
+
+          var turnStack = document.getElementById('turn-stack');
+          for (var i = 0; i < TURNS.length; i++) {
+            var t = TURNS[i];
+            var row = el('div', 'turn'); row.id = 'turn-' + i;
+            var meta = el('div', 't-meta');
+            meta.appendChild(el('span', 't-time', mmss(t[1])));
+            meta.appendChild(el('span', 't-who', 'Participant'));
+            meta.appendChild(el('span', 't-id', t[0]));
+            row.appendChild(meta);
+            row.appendChild(el('div', 't-text', t[2]));
+            turnStack.appendChild(row);
+          }
+
+          var cardStack = document.getElementById('card-stack');
+          for (var j = 0; j < CARDS.length; j++) {
+            var c = CARDS[j];
+            var card = el('div', 'ecard ' + c[2]); card.id = 'ecard-' + j;
+            var head = el('div', 'e-head');
+            head.appendChild(el('span', 'e-type', c[1]));
+            head.appendChild(el('span', 'e-conf', c[3].toFixed(2)));
+            card.appendChild(head);
+            card.appendChild(el('div', 'e-body', c[4]));
+            var foot = el('div', 'e-foot');
+            foot.appendChild(el('span', 'e-prov', c[2] === 'said' ? 'Said' : 'Inferred'));
+            foot.appendChild(el('span', 'e-id', c[0]));
+            card.appendChild(foot);
+            cardStack.appendChild(card);
+          }
+
+          var covStack = document.getElementById('cov-stack');
+          for (var k = 0; k < COVERAGE.length; k++) {
+            var v = COVERAGE[k];
+            var crow = el('div', 'crow' + (v[2] ? '' : ' pending')); crow.id = 'crow-' + k;
+            var top = el('div', 'c-top');
+            top.appendChild(el('span', 'c-ord', v[0]));
+            top.appendChild(el('span', 'c-name', v[1]));
+            crow.appendChild(top);
+            var track = el('div', 'c-track');
+            var fill = el('span', 'c-fill'); fill.id = 'cfill-' + k;
+            track.appendChild(fill);
+            crow.appendChild(track);
+            covStack.appendChild(crow);
+          }
+          var summary = el('div'); summary.id = 'cov-summary';
+          summary.appendChild(el('div', 's-hair'));
+          var big = el('div'); big.id = 'cov-big'; big.textContent = '4 of 6';
+          summary.appendChild(big);
+          summary.appendChild((function () { var n = el('div', null, 'Phases covered'); n.id = 'cov-lab'; return n; })());
+          var sb = el('div'); sb.id = 'score-block';
+          sb.appendChild((function () { var n = el('div', null, 'Report score'); n.id = 'score-lab'; return n; })());
+          var sn = el('div'); sn.id = 'score-num'; sn.textContent = '0';
+          sb.appendChild(sn);
+          var sbar = el('span'); sbar.id = 'score-bar';
+          sb.appendChild(sbar);
+          summary.appendChild(sb);
+          covStack.appendChild(summary);
+
+          /* ═══ TIMELINE ═══ */
+          var tl = gsap.timeline({ paused: true });
+
+          // ── 0.0–0.9 · shell in ──
+          tl.fromTo('#logo-chip', { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.10);
+          tl.fromTo('#meta',      { opacity: 0 },         { opacity: 1, duration: 0.45, ease: 'power2.out' }, 0.28);
+          tl.fromTo('#clock-wrap',{ opacity: 0 },         { opacity: 1, duration: 0.45, ease: 'power2.out' }, 0.34);
+          tl.fromTo('#rule-track',{ opacity: 0 },         { opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.20);
+          tl.set('#rule-fill', { scaleX: 0 }, 0);
+
+          // ── 0.9–1.6 · column headers land, panels still empty ──
+          tl.fromTo('.col-head', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.12, ease: 'power2.out' }, 0.60);
+          tl.fromTo('.col-hair', { scaleX: 0 },        { scaleX: 1, duration: 0.55, stagger: 0.12, ease: 'power2.out' }, 0.72);
+          tl.fromTo('.crow',     { opacity: 0, y: 10 }, { opacity: 0.9, y: 0, duration: 0.4, stagger: 0.07, ease: 'power2.out' }, 1.05);
+
+          // ── 1.8–11.2 · THE RUN · clock + progress rule ──
+          var clockEl = document.getElementById('clock-now');
+          var clockState = { s: 0 };
+          tl.to(clockState, {
+            s: INTERVIEW, duration: RUN_OUT - RUN_IN, ease: 'none',
+            onUpdate: function () { clockEl.textContent = mmss(clockState.s); }
+          }, RUN_IN);
+          tl.to('#rule-fill', { scaleX: 1, duration: RUN_OUT - RUN_IN, ease: 'none' }, RUN_IN);
+
+          // ── transcript streams in; the stack translates up so the newest turn stays in frame ──
+          for (var a = 0; a < TURNS.length; a++) {
+            var at = RUN_IN + (TURNS[a][1] / INTERVIEW) * (RUN_OUT - RUN_IN - 0.9);
+            tl.fromTo('#turn-' + a, { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }, at);
+            var over = (a + 1) * TURN_PITCH - 16 - TURN_VIEW;
+            if (over > 0) tl.to('#turn-stack', { y: -over, duration: 0.5, ease: 'power2.inOut' }, at + 0.08);
+          }
+
+          // ── evidence cards materialise; counter climbs to the real total of 45 ──
+          var CARD_AT = [2.5, 3.3, 4.3, 5.1, 6.1, 6.9, 7.9, 8.7, 9.6, 10.5];
+          for (var b = 0; b < CARDS.length; b++) {
+            tl.fromTo('#ecard-' + b, { opacity: 0, scale: 0.94, y: 16 },
+                                     { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'back.out(1.4)' }, CARD_AT[b]);
+            var cover = (b + 1) * CARD_PITCH - 16 - CARD_VIEW;
+            if (cover > 0) tl.to('#card-stack', { y: -cover, duration: 0.55, ease: 'power2.inOut' }, CARD_AT[b] + 0.12);
+          }
+          var evEl = document.getElementById('ev-count');
+          var evState = { n: 0 };
+          tl.to(evState, {
+            n: 45, duration: 8.6, ease: 'none',
+            onUpdate: function () { evEl.textContent = Math.round(evState.n); }
+          }, 2.4);
+
+          // ── coverage bars sweep as phases are met; 01 and 06 never fill ──
+          for (var m = 0; m < COVERAGE.length; m++) {
+            if (COV_FILL_AT[m] === null) continue;
+            tl.to('#crow-' + m, { opacity: 1, duration: 0.3, ease: 'power2.out' }, COV_FILL_AT[m]);
+            tl.fromTo('#cfill-' + m, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power2.out' }, COV_FILL_AT[m]);
+          }
+
+          // ── 11.4–12.5 · LAND · 4 of 6, then the score ──
+          tl.fromTo('#cov-summary', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 11.35);
+          tl.fromTo('#cov-big', { scale: 0.86 }, { scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 11.45);
+          var scoreEl = document.getElementById('score-num');
+          var scoreState = { n: 0 };
+          tl.to(scoreState, {
+            n: 67, duration: 0.75, ease: 'power2.out',
+            onUpdate: function () { scoreEl.textContent = Math.round(scoreState.n); }
+          }, 11.75);
+          tl.fromTo('#score-bar', { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: 'power2.out' }, 11.85);
+
+          // ── 12.5–15.0 · CLAIM · the finished evidence base ghosts through the veil ──
+          tl.to('#veil', { opacity: 0.93, duration: 0.7, ease: 'power2.inOut' }, 12.50);
+          tl.to('#claim', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 12.75);
+          tl.fromTo('#claim-kicker', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 12.85);
+          tl.fromTo('#claim-head',   { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.6,  ease: 'power2.out' }, 13.00);
+          tl.fromTo('#claim-rule',   { scaleX: 0 },         { scaleX: 1, duration: 0.5, ease: 'power2.out' }, 13.35);
+          tl.fromTo('#claim-sub',    { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5,  ease: 'power2.out' }, 13.50);
+          tl.fromTo('#claim-chip',   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5,  ease: 'power2.out' }, 13.80);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines['cm4s-evidence'] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>

@@ -30,7 +30,7 @@ Her English is non-native. Nothing was tidied. `it's not look like` stays.
 | 0.0–0.6 | (nothing) | Cream frame, gold hairline draws L→R, 0→300px | A breath before a person speaks. An empty first half-second buys attention that a text-on-frame-1 open spends |
 | 0.6–4.2 | **"I don't want to waste my time."** — Roboto 400, 78px, brown | Fades up + rises 18px, then holds still for 3.2s | The first saying is unemphatic — she says it in passing. 400 weight, no colour, no motion after arrival. 3.6s = well over the 3s readable floor |
 | 4.2–8.4 | Second saying appears **below** — Roboto 700, 96px, brown. First saying **dims to `--brand-muted`** | Line 2 fades up over 0.55s; line 1 crossfades to muted at the same instant | The edit's one real move. The second saying is not a new line, it's the same line — so it can't arrive as a new idea. It arrives *bigger and heavier* while the first recedes. Nothing else happens on screen for four seconds |
-| 7.5–8.4 | `PARTICIPANT 001 · CHIANG MAI` — Oswald 600, 26px, muted, above the gold rule | Fades in only, no movement | Attribution lands *after* the words, never before. Naming the source first makes it a case study; naming it last leaves it a person |
+| 7.5–8.4 | `PARTICIPANT 001 · CHIANG MAI` — Oswald 600, 26px, muted, **below** the quote block | Fades in only, no movement | Attribution lands *after* the words, never before — and below them, so it reads as a signature rather than a header. Naming the source first makes it a case study; naming it last leaves it a person |
 | **8.4** | — | **Hard cut to dark `#25201e`** — no fade, one frame | The only dark beat in the piece. A cut, not a transition: the disappointment was abrupt for her too |
 | 8.5–11.9 | **"But it's kind of like, it's not look like what they said."** — Roboto 400, 64px, cream on dark | Fades up 0.4s, holds 3.0s, cuts out | 3.4s for 12 words. The friction the first quote maps to: the Facebook promotion promised Japanese culture and delivered a food festival |
 | **11.9** | — | **Hard cut back to cream** | Symmetry with 8.4. The dark beat is a guest and it leaves the way it arrived |
@@ -54,6 +54,8 @@ Her English is non-native. Nothing was tidied. `it's not look like` stays.
 No face in frame, so no `cards_below_y` constraint. The type constraints that replace it:
 
 - Text block left-aligned in a 888px column, 96px page margins — no glyph within 96px of an edge
+- All three beats share one optical centre (block mid ≈ y 840–880) so the frame doesn't rock
+  between cuts; verified against the 2s/5s/9s/13s snapshots and corrected once (B and C sat high)
 - Every quote wraps naturally (`max-width`), **no `<br>` in body text** (core rule 6)
 - Smallest type on screen is 26px Oswald 600 (attribution) — reads at 1080 wide
 - Contrast: `#342d2d` on `#faf5ec` ≈ 13:1 · `#faf5ec` on `#25201e` ≈ 14:1
