@@ -2,6 +2,8 @@
 
 Hackathon (2026-07-31, **clock: 1:30pm → 5:00pm**) running a stuck-discovery factory.
 
+<!-- push-test: 2026-08-01 sync loop verification -->
+
 See the canonical project brief at: [[projects/nimman-hackathon-stuck-discovery]]
 See the concept journal entry at: [[journal/2026-07-31-stuck-discovery-micro-app]]
 
