@@ -28,7 +28,7 @@ vanish**: superseded is not deleted, and the board still shows them.
 | 4 | 5.4–7.6 | `05 JUDGE` lights. The **yellow gate** wipes across the full width. Criteria land one by one | The turn. This is the human decision gate, and it is the only yellow in the piece | Yellow band: `JUDGE` + `A HUMAN DECIDES` + `REAL · NEW · GOOD · FEASIBLE` chips |
 | 5 | 8.0–9.2 | The pass: **13 cards fade to 16%** in place (fast stagger). 5 lift, gain a brown rule and a check | The core point, twice: a person chose, and the losers stay visible. Fading ≠ deleting | Grid splits into faint and solid without changing shape |
 | 6 | 9.6–11.6 | Five survivor chips assemble below the gate; **`18/20`** lands on the first; `HOT` pill last | The shortlist, and the one score we actually have. The rest stay unlabelled rather than invented | `PROOFPASS 18/20` + four unlabelled checked chips + `HOT` |
-| 7 | 11.8–12.9 | `06 BUILD` lights. Build lane fills, five segments left to right | Where the funnel ends: runnable things, not a backlog | Segmented amber-ruled lane under the shortlist |
+| 7 | 11.8–12.9 | `06 BUILD` lights. Build lane fills, five gold segments left to right, caption last | Where the funnel ends: runnable things, not a backlog — and the bar is stated honestly | Five-segment lane + `the honest bar: three to five runnable apps` (from `docs/board-2026-08-01.md`) |
 | 8 | 13.2–14.2 | Closing line resolves under the board | Names the rule the animation just demonstrated, so it survives the scroll | `SUPERSEDED IS NOT DELETED — THE FADED CARDS STAY ON THE BOARD` |
 | — | 14.2–15.0 | Hold on the finished board | Let the whole funnel be read at once in the final frame | Everything, at rest |
 
@@ -40,6 +40,7 @@ vanish**: superseded is not deleted, and the board still shows them.
 | JUDGE gate | `--brand-yellow` `#ffde59` | The human decision gate. Reserved, spent once |
 | Cards, surfaces | `--brand-linen` / `--brand-surface` | Neutral field |
 | Faded losers | same tokens at 16% opacity | Superseded, not deleted — no new colour |
+| Build-lane fill | `--brand-gold` `#ccba9d` | First pass filled these with `--brand-brown` and the frame grew five dark slabs — a direct hit on "one dark element per page". Gold reads as filled without going dark |
 | Text | `--brand-brown`, `--brand-muted` | Never pure black |
 
 **No logo.** The AppyDave lockup demands yellow for "Dave", and yellow is spent on the gate. A
@@ -64,4 +65,15 @@ npx hyperframes lint public
 npx hyperframes snapshot public --at 2,5,9,13 --no-end --describe false
 ```
 
-`2` = evidence only · `5` = the wide field · `9` = judged, losers faded · `13` = built + closing.
+`2` = evidence only · `5` = the wide field · `9` = judged, losers faded · `13` = built.
+
+The closing line lands at 13.2, *after* the last required snapshot — check the resting frame with
+`--at 14.5` if you change it.
+
+## Fixed during the build (don't reintroduce)
+
+1. **A two-line title collided with the stage rail.** The rail sits at y=172 and a 58px two-line
+   title runs to y=200. The title is one line now; if it grows, move the rail, not the leading.
+2. **`18/20` overflowed its 196px chip** on one row. The named shortlist chip stacks
+   name-over-score (`.sc.named`); the other four stay single-row.
+3. **Brown build-lane fill → five dark slabs.** Now `--brand-gold`. See the colour table above.

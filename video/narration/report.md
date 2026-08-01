@@ -28,3 +28,4 @@ One conversation went in. Twenty minutes. Out came ten pains, twenty-four facts,
 - **The unanswered questions are on purpose.** A report that only shows what it found looks like a machine bluffing. Showing what it missed is what makes the rest credible — and it's the honest register the brand runs on.
 - The reveal is held to the very last line. Everything before it is inventory; "Nobody wrote a word of it" is the only sentence the picture cannot say for itself.
 - Avoided: any claim about *when* the report finished. The session ran 08:35 and the report timestamps 09:26 — "finished before they left the room" would have been a nice line and is not true.
+- **TTS variant:** the em dash before "and twelve questions" was rendered as a comma for Kokoro (it mis-reads em dashes). Wording is otherwise identical to the script block.

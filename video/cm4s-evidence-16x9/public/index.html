@@ -148,7 +148,7 @@
       .ecard .e-id { font-family: 'Roboto Mono', ui-monospace, monospace; font-size: 14px; color: var(--brand-muted); }
 
       /* ── coverage rows ────────────────────────────────────────────────── */
-      .crow { position: relative; width: 100%; margin-bottom: 22px; opacity: 0; }
+      .crow { position: relative; width: 100%; margin-bottom: 28px; opacity: 0; }
       .crow .c-top { display: flex; align-items: flex-start; gap: 12px; height: 48px; }
       .crow .c-ord {
         font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
@@ -195,8 +195,10 @@
         font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
         font-size: 20px; letter-spacing: 7px; text-transform: uppercase; color: var(--brand-muted); margin-bottom: 30px;
       }
+      /* max-width is the line break — it forces the wrap after "interview." so the two
+         sentences land one per line. No <br> in body text. */
       #claim-head {
-        max-width: 1280px; text-align: center;
+        max-width: 1000px; text-align: center;
         font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
         font-size: 86px; line-height: 1.06; letter-spacing: 0.5px; text-transform: uppercase; color: var(--brand-brown);
       }
@@ -394,12 +396,12 @@
           }
           var summary = el('div'); summary.id = 'cov-summary';
           summary.appendChild(el('div', 's-hair'));
-          var big = el('div'); big.id = 'cov-big'; big.textContent = '4 of 6';
+          var big = el('div'); big.id = 'cov-big'; big.textContent = '0 of 6';
           summary.appendChild(big);
           summary.appendChild((function () { var n = el('div', null, 'Phases covered'); n.id = 'cov-lab'; return n; })());
           var sb = el('div'); sb.id = 'score-block';
           sb.appendChild((function () { var n = el('div', null, 'Report score'); n.id = 'score-lab'; return n; })());
-          var sn = el('div'); sn.id = 'score-num'; sn.textContent = '0';
+          var sn = el('div'); sn.id = 'score-num'; sn.textContent = '—';
           sb.appendChild(sn);
           var sbar = el('span'); sbar.id = 'score-bar';
           sb.appendChild(sbar);
@@ -420,6 +422,9 @@
           tl.fromTo('.col-head', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.12, ease: 'power2.out' }, 0.60);
           tl.fromTo('.col-hair', { scaleX: 0 },        { scaleX: 1, duration: 0.55, stagger: 0.12, ease: 'power2.out' }, 0.72);
           tl.fromTo('.crow',     { opacity: 0, y: 10 }, { opacity: 0.9, y: 0, duration: 0.4, stagger: 0.07, ease: 'power2.out' }, 1.05);
+          // The coverage meter is live from the start — it is the one panel that must be readable
+          // for the whole run, so the bottom-right quadrant never sits empty.
+          tl.fromTo('#cov-summary', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 1.45);
 
           // ── 1.8–11.2 · THE RUN · clock + progress rule ──
           var clockEl = document.getElementById('clock-now');
@@ -432,7 +437,8 @@
 
           // ── transcript streams in; the stack translates up so the newest turn stays in frame ──
           for (var a = 0; a < TURNS.length; a++) {
-            var at = RUN_IN + (TURNS[a][1] / INTERVIEW) * (RUN_OUT - RUN_IN - 0.9);
+            // Same mapping as the header clock, so a row's timestamp never runs ahead of it.
+            var at = RUN_IN + (TURNS[a][1] / INTERVIEW) * (RUN_OUT - RUN_IN);
             tl.fromTo('#turn-' + a, { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }, at);
             var over = (a + 1) * TURN_PITCH - 16 - TURN_VIEW;
             if (over > 0) tl.to('#turn-stack', { y: -over, duration: 0.5, ease: 'power2.inOut' }, at + 0.08);
@@ -460,8 +466,21 @@
             tl.fromTo('#cfill-' + m, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power2.out' }, COV_FILL_AT[m]);
           }
 
-          // ── 11.4–12.5 · LAND · 4 of 6, then the score ──
-          tl.fromTo('#cov-summary', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 11.35);
+          // ── the meter climbs · one driver reads the fill times and writes "n of 6" ──
+          var bigEl = document.getElementById('cov-big');
+          var meterState = { t: 1.45 };
+          tl.to(meterState, {
+            t: 11.5, duration: 11.5 - 1.45, ease: 'none',
+            onUpdate: function () {
+              var n = 0;
+              for (var q = 0; q < COV_FILL_AT.length; q++) {
+                if (COV_FILL_AT[q] !== null && meterState.t >= COV_FILL_AT[q] + 0.7) n++;
+              }
+              bigEl.textContent = n + ' of 6';
+            }
+          }, 1.45);
+
+          // ── 11.4–12.5 · LAND · the meter holds on 4 of 6, then the score ──
           tl.fromTo('#cov-big', { scale: 0.86 }, { scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 11.45);
           var scoreEl = document.getElementById('score-num');
           var scoreState = { n: 0 };
