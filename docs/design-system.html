@@ -76,6 +76,65 @@
   section > .intro { margin: 0 0 24px; max-width: 68ch; color: var(--brand-muted); }
   section > .intro strong { color: var(--brand-brown); font-weight: 700; }
 
+  /* logo lockups */
+  .logo-chip {
+    background: var(--brand-dark-surface); padding: 13px 20px; display: inline-block;
+  }
+  .logo-chip .wm { font-family: 'Bebas Neue', Arial, sans-serif; line-height: 1; letter-spacing: .02em; }
+  .logo-flat { font-family: 'Bebas Neue', Arial, sans-serif; line-height: 1; letter-spacing: .02em; }
+
+  .lockups { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+  .lock { background: var(--brand-near-white); border: 1px solid var(--brand-border); }
+  .lock > .lh {
+    padding: 11px 18px; border-bottom: 1px solid var(--brand-border);
+    background: var(--brand-linen); display: flex; align-items: baseline; gap: 12px;
+  }
+  .lock > .lh h4 { font-size: 12.5px; letter-spacing: .07em; }
+  .lock > .lh .rank {
+    margin-left: auto; font-family: 'Roboto Mono', monospace; font-size: 9.5px;
+    letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px;
+    background: var(--brand-brown); color: var(--brand-near-white);
+  }
+  .lock > .lh .rank.alt { background: none; border: 1px solid var(--brand-border); color: var(--brand-muted); }
+  .lock .lstage { padding: 26px 18px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .lock .lnote { padding: 0 18px 16px; margin: 0; font-size: 13px; color: var(--brand-muted); }
+  .lock .lnote strong { color: var(--brand-brown); }
+  .lock .ground {
+    font-family: 'Roboto Mono', monospace; font-size: 9.5px; color: var(--brand-muted);
+    letter-spacing: .06em; text-transform: uppercase; display: block; margin-top: 7px;
+  }
+  .on-linen { background: var(--brand-linen); padding: 16px; }
+
+  /* code block */
+  pre.tokens {
+    background: var(--brand-dark-surface); color: #ffffff;
+    font-family: 'Roboto Mono', monospace; font-size: 12px; line-height: 1.7;
+    padding: 20px 22px; margin: 0; overflow-x: auto;
+  }
+  pre.tokens .c { color: var(--brand-gold); }
+  pre.tokens .v { color: var(--brand-yellow); }
+
+  /* contrast pairings */
+  table.pairs { width: 100%; border-collapse: collapse; }
+  table.pairs thead th {
+    font-family: 'Oswald', Arial, sans-serif; font-size: 10.5px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .1em; color: var(--brand-muted);
+    text-align: left; padding: 0 12px 10px 0;
+  }
+  table.pairs td { border-top: 1px solid var(--brand-border); padding: 0; }
+  table.pairs td.demo { width: 216px; padding: 8px 12px 8px 0; }
+  table.pairs .pairbox {
+    padding: 11px 14px; font-family: 'Oswald', Arial, sans-serif;
+    text-transform: uppercase; font-size: 13px; letter-spacing: .06em;
+  }
+  table.pairs td.note {
+    font-size: 13px; color: var(--brand-muted); padding: 12px 0 12px 4px; vertical-align: middle;
+  }
+  table.pairs td.hexes {
+    font-family: 'Roboto Mono', monospace; font-size: 10.5px; color: var(--brand-muted);
+    white-space: nowrap; padding: 12px 16px 12px 0; vertical-align: middle;
+  }
+
   /* palette */
   .swatches { display: grid; gap: 2px; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); }
   .sw { border: 1px solid var(--brand-border); background: var(--brand-near-white); }
@@ -174,7 +233,7 @@
 <header>
   <div class="wrap">
     <div class="masthead">
-      <div class="logo"><span class="appy">Appy</span><span class="dave">Dave</span></div>
+      <div class="logo-chip"><span class="wm" style="font-size:30px"><span style="color:var(--brand-gold)">Appy</span><span style="color:var(--brand-yellow)">Dave</span></span></div>
       <h2>CM4S Design System</h2>
       <div class="meta">CHIANG MAI · 4 SEASONS · AUG 2026</div>
     </div>
@@ -217,6 +276,158 @@
 
   <section>
     <span class="sec-num">02</span>
+    <h3>The tokens, ready to paste</h3>
+    <p class="intro">
+      Copy this block into any stylesheet. <strong>All sixteen, always</strong> — an undefined
+      custom property renders as invisible text rather than failing loudly, which is the single
+      most common way a page silently breaks.
+    </p>
+    <pre class="tokens">:root {
+  <span class="c">color-scheme</span>: <span class="v">light</span>;              <span class="c">/* pinned — never a dark override */</span>
+
+  <span class="c">--brand-brown</span>:        <span class="v">#342d2d</span>;
+  <span class="c">--brand-gold</span>:         <span class="v">#ccba9d</span>;
+  <span class="c">--brand-yellow</span>:       <span class="v">#ffde59</span>;
+  <span class="c">--brand-amber</span>:        <span class="v">#c8841a</span>;
+  <span class="c">--brand-muted</span>:        <span class="v">#7a6e5e</span>;
+  <span class="c">--brand-near-white</span>:   <span class="v">#faf5ec</span>;
+  <span class="c">--brand-surface</span>:      <span class="v">#f0ebe4</span>;
+  <span class="c">--brand-linen</span>:        <span class="v">#e8e0d4</span>;
+  <span class="c">--brand-border</span>:       <span class="v">#d4cdc4</span>;
+  <span class="c">--brand-chrome</span>:       <span class="v">#1a1515</span>;
+  <span class="c">--brand-dark-surface</span>: <span class="v">#25201e</span>;
+  <span class="c">--brand-blue</span>:         <span class="v">#2E91FC</span>;
+
+  <span class="c">--st-complete</span>:        <span class="v">#22c55e</span>;
+  <span class="c">--st-active</span>:          <span class="v">#16a34a</span>;
+  <span class="c">--st-error</span>:           <span class="v">#dc2626</span>;
+  <span class="c">--st-pending</span>:         <span class="v">#b8a070</span>;
+}</pre>
+  </section>
+
+  <section>
+    <span class="sec-num">03</span>
+    <h3>Contrast pairings</h3>
+    <p class="intro">
+      Use these combinations, not guesses. Every pairing below is shown at real weight so you can
+      see it rather than trust a table. <strong>Gold and yellow are the two lightest tokens</strong>
+      — they only work on dark grounds, which is the rule that governs the logo overleaf.
+    </p>
+    <div class="panel" style="background:var(--brand-near-white)">
+      <table class="pairs">
+        <thead>
+          <tr><th scope="col">Pairing</th><th scope="col">Tokens</th><th scope="col">Use for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="demo"><div class="pairbox" style="background:#342d2d;color:#ffffff">Brown · white text</div></td>
+            <td class="hexes">#342d2d + #ffffff</td>
+            <td class="note">Dark bands, mastheads. Accent with gold or yellow</td>
+          </tr>
+          <tr>
+            <td class="demo"><div class="pairbox" style="background:#25201e;color:#ffffff">Dark surface · white</div></td>
+            <td class="hexes">#25201e + #ffffff</td>
+            <td class="note">The one dark beat per page. Where the logo lives</td>
+          </tr>
+          <tr>
+            <td class="demo"><div class="pairbox" style="background:#ffde59;color:#342d2d">Yellow · brown text</div></td>
+            <td class="hexes">#ffde59 + #342d2d</td>
+            <td class="note">The human decision gate. Yellow as ground, never as ink</td>
+          </tr>
+          <tr>
+            <td class="demo"><div class="pairbox" style="background:#ccba9d;color:#342d2d">Gold · brown text</div></td>
+            <td class="hexes">#ccba9d + #342d2d</td>
+            <td class="note">Warm secondary blocks, white cards on top</td>
+          </tr>
+          <tr>
+            <td class="demo"><div class="pairbox" style="background:#faf5ec;color:#342d2d;border:1px solid #d4cdc4">Cream · brown text</div></td>
+            <td class="hexes">#faf5ec + #342d2d</td>
+            <td class="note">The default canvas. Amber for accents</td>
+          </tr>
+          <tr>
+            <td class="demo"><div class="pairbox" style="background:#f0ebe4;color:#342d2d">Surface · brown text</div></td>
+            <td class="hexes">#f0ebe4 + #342d2d</td>
+            <td class="note">Section alternates. Amber or gold accents</td>
+          </tr>
+          <tr>
+            <td class="demo"><div class="pairbox" style="background:#e8e0d4;color:#342d2d">Linen · brown text</div></td>
+            <td class="hexes">#e8e0d4 + #342d2d</td>
+            <td class="note">Cards, callouts, table headers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-num">04</span>
+    <h3>The logo</h3>
+    <p class="intro">
+      Bebas Neue, always. <strong>"Appy" in gold, "Dave" in yellow — never a single colour.</strong>
+      Two approved lockups: the dark chip is primary, the light-safe two-tone is the fallback for
+      places a dark element would be wrong.
+    </p>
+    <div class="lockups">
+
+      <div class="lock">
+        <div class="lh">
+          <h4>Dark chip</h4>
+          <span class="rank">Primary</span>
+        </div>
+        <div class="lstage">
+          <div>
+            <div class="logo-chip"><span class="wm" style="font-size:36px"><span style="color:var(--brand-gold)">Appy</span><span style="color:var(--brand-yellow)">Dave</span></span></div>
+            <span class="ground">ON DARK-SURFACE #25201E</span>
+          </div>
+          <div class="on-linen">
+            <div class="logo-chip"><span class="wm" style="font-size:22px"><span style="color:var(--brand-gold)">Appy</span><span style="color:var(--brand-yellow)">Dave</span></span></div>
+            <span class="ground">SMALL, ON LINEN</span>
+          </div>
+        </div>
+        <p class="lnote"><strong>Exactly the spec, on the ground the spec intends.</strong> Gold and
+          yellow both sing on <code>#25201e</code> and it holds down to navigation size. The chip
+          also becomes the page's one permitted dark beat, so it earns its darkness twice.</p>
+      </div>
+
+      <div class="lock">
+        <div class="lh">
+          <h4>Light-safe two-tone</h4>
+          <span class="rank alt">Fallback</span>
+        </div>
+        <div class="lstage">
+          <div>
+            <div class="logo-flat" style="font-size:36px"><span style="color:var(--brand-brown)">Appy</span><span style="color:var(--brand-amber)">Dave</span></div>
+            <span class="ground">DIRECT ON CREAM</span>
+          </div>
+          <div class="on-linen">
+            <div class="logo-flat" style="font-size:22px"><span style="color:var(--brand-brown)">Appy</span><span style="color:var(--brand-amber)">Dave</span></div>
+            <span class="ground">SMALL, ON LINEN</span>
+          </div>
+        </div>
+        <p class="lnote">Brown + amber both hold contrast on cream and the two-tone rule survives.
+          <strong>Use where a dark chip would be wrong</strong> — inside a light card, a dense
+          document header, or a page that already spent its one dark element elsewhere.</p>
+      </div>
+
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+      <p style="margin:0 0 10px; font-size:14px;"><strong>Never do these.</strong></p>
+      <p style="margin:0 0 7px; font-size:13.5px; color:var(--brand-muted);">
+        <strong style="color:var(--brand-brown)">Gold or yellow on a light ground.</strong>
+        They are the two lightest tokens in the palette — on cream they go to mush. This is what
+        the brand's "never on white" rule actually means: it needs a dark ground.</p>
+      <p style="margin:0 0 7px; font-size:13.5px; color:var(--brand-muted);">
+        <strong style="color:var(--brand-brown)">Single colour.</strong> The two-tone split is the
+        mark. One colour is not a quieter logo, it is a different one.</p>
+      <p style="margin:0; font-size:13.5px; color:var(--brand-muted);">
+        <strong style="color:var(--brand-brown)">Bebas anywhere else.</strong> It is for the logo
+        only — never headings, never navigation. Oswald does that job.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="sec-num">05</span>
     <h3>Pipeline state</h3>
     <p class="intro">
       Status colours taken from AppyDave's semantic layer — nothing invented. Complete and
@@ -234,7 +445,7 @@
   </section>
 
   <section>
-    <span class="sec-num">03</span>
+    <span class="sec-num">06</span>
     <h3>Evidence provenance</h3>
     <p class="intro">
       The one thing unique to this project. The system must never present AI synthesis as
@@ -257,7 +468,7 @@
   </section>
 
   <section>
-    <span class="sec-num">04</span>
+    <span class="sec-num">07</span>
     <h3>Typography</h3>
     <p class="intro">
       Four faces, each with one job. <strong>Roboto Mono carries every machine-readable string</strong>
@@ -285,7 +496,7 @@
   </section>
 
   <section>
-    <span class="sec-num">05</span>
+    <span class="sec-num">08</span>
     <h3>Rules already broken once</h3>
     <p class="intro">
       Each of these cost a rebuild. They are constraints, not preferences.
@@ -315,7 +526,7 @@
   </section>
 
   <section>
-    <span class="sec-num">06</span>
+    <span class="sec-num">09</span>
     <h3>Shipping visual work</h3>
     <div class="darkbeat">
       <span class="tag">THE ONE DARK BEAT<br>ON THIS PAGE</span>
@@ -331,7 +542,7 @@
   </section>
 
   <section>
-    <span class="sec-num">07</span>
+    <span class="sec-num">10</span>
     <h3>Participant micro-apps</h3>
     <p class="intro">
       Apps inherit sections 01 and 04. Layout belongs to the scaffold — AppyTron for desktop

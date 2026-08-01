@@ -7,6 +7,27 @@ This is the one authored file in `inbox/` — everything else here is dropped, n
 
 ---
 
+## 2026-08-01 · Logo decided — design system now the full reference
+
+`claude.ai/code/artifact/601c7895-b9f7-443a-b68b-c373ba223692` — updated in place, same link.
+
+**David picked both lockups.** The dark chip is now **primary**; the light-safe two-tone is the
+**fallback** for places a dark element would be wrong — inside a light card, a dense header, or a
+page that already spent its one dark beat.
+
+The design system page grew into a proper reference — ten sections now:
+
+- Every colour, as swatches **and** as a copy-paste `:root` block (all sixteen tokens)
+- **Contrast pairings**, each shown at real weight rather than described
+- Both logo lockups at two sizes, on two grounds, with the three "never do this" rules
+- Pipeline state, evidence provenance, typography specimens, and the shipping rules
+
+The rule underneath the logo fix, worth knowing before you build anything: **gold and yellow are
+the two lightest tokens in the palette and only work on dark grounds.** The brand's "never on
+white" line really means *needs a dark ground*.
+
+---
+
 ## 2026-08-01 · Logo — four options, needs a decision
 
 `claude.ai/code/artifact/9de1421b-167d-45f9-8556-d3a8f5046868`

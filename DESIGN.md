@@ -66,6 +66,23 @@ only case where numbered markers are earned. Never amber as a button.
 `--brand-yellow` is **reserved** — the human decision gate and the active tab underline. Nothing
 else. If yellow appears three times on a page, two of them are wrong.
 
+## 2b · The logo — two approved lockups
+
+Bebas Neue always. **"Appy" gold `#ccba9d`, "Dave" yellow `#ffde59` — never a single colour.**
+
+| | Lockup | When |
+|---|---|---|
+| **Primary** | **Dark chip** — the wordmark on a `#25201e` block | Default everywhere. Gold and yellow both sing on dark, and it holds down to nav size. The chip doubles as the page's one permitted dark beat |
+| **Fallback** | **Light-safe two-tone** — "Appy" brown `#342d2d`, "Dave" amber `#c8841a`, direct on cream | Where a dark chip would be wrong: inside a light card, a dense document header, or a page that already spent its dark element |
+
+Never:
+
+- **Gold or yellow on a light ground.** They are the two lightest tokens in the palette; on cream
+  both letters go to mush. The brand's "never on white" rule is really a *needs a dark ground* rule.
+- **Single colour.** The two-tone split *is* the mark — one colour isn't a quieter logo, it's a
+  different one.
+- **Bebas anywhere but the logo.** Never headings, never nav. Oswald does that job.
+
 ## 3 · Typography
 
 | Font | Role |
