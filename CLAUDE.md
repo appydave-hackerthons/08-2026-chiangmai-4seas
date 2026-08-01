@@ -2,49 +2,71 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Status: greenfield
+## Status: pre-planning
 
-The repo is empty as of 2026-08-01. There is no code, no build, no tests yet — so there are no
-commands or architecture to document. **Fill this in as the stack lands**, don't invent it.
+No application code yet. The repo currently holds source material, a recon, and a visual artifact.
+**Fill this in as the stack lands** — don't invent commands or architecture that don't exist.
 
 ## What this is
 
-Hackathon project for **Hacker Fund**, Chiang Mai, August 2026 (`08-2026-chaingmai-4seas`).
-Lives under `~/dev/ad/apps/appydave-hackerthons/` — the hackathon folder, separate from the
-`/apps/` micro-app family in the parent monorepo `CLAUDE.md`.
+Hackathon project for **Hacker Fund**, Chiang Mai (4 Seasons), August 2026.
 
-Scope, problem statement, and stack are **not yet decided**. More detail is coming from David —
-until then, ask rather than assume.
+The system listens to human and machine traces, discovers opportunities inside them, and turns
+selected opportunities into working micro-apps. Two evidence sources with different jobs:
 
-## `raw/` — unprocessed intake
+- **Captain's Log** — upstream, human traces (Plaud / Omi / Whisper). What might be worth building.
+- **Angel Eye** — downstream, machine traces (Claude Code / Codex sessions). What actually happened
+  during the build.
 
-`raw/` holds material pasted in from the clipboard (briefs, notes, specs, transcripts) before it's
-been turned into anything. Treat it as **input, not source of truth** — read it, distil it, but
-don't let it drift into being the documentation.
+Six phases: Discover → Evaluate → Define → Build → Analyse → Productise. A **human decision gate**
+sits between Evaluate and Define — the system never goes from interview straight to build.
 
-Use the `clipboard` skill for the paste → file step; it infers filenames from headings.
+Repo: `github.com/appydave-hackerthons/08-2026-chiangmai-4seas` (private).
+Local folder is `08-2026-chaingmai-4seas` — note the transposition; the repo name is corrected.
 
-## People
+## Team
 
-| Who | Contact |
-|---|---|
-| Karlen | karlenchang@gmail.com |
-| David Cruwys (AppyDave) | david@ideasmen.com.au |
+Three people. Lineage one is the team itself; four participant lineages follow.
 
-David also mentioned a possible `@appydave.com` address — unconfirmed, verify before using it.
+| Who | Owns | Contact |
+|---|---|---|
+| **David Cruwys** | Building the AI applications | david@ideasmen.com.au |
+| **Karlen** | Interviews, interview questions, customer journey, lean canvas, marketing presentation | karlenchang@gmail.com |
+| **Ethon** | Building the AI applications | — |
+
+David and Ethon take **parallel paths** on the build side and deliberately do things their own way,
+then compare where they converge.
+
+> Spelling: **Karlen**. The source doc in `raw/` says "Carlan" throughout — that's the transcript's
+> error, left verbatim because `raw/` is unprocessed intake. Use Karlen everywhere else.
+
+## Gate status — verified 2026-08-01
+
+| Gate | State | Detail |
+|---|---|---|
+| Captain's Log MCP | **Cleared, one gap** | Live on :7101, 8 tools. No participant/entity field exists in the data model — tag at capture time instead; tags are searchable. |
+| Angel Eye MCP | **Blocked** | No MCP server exists. HTTP API lists sessions by project and returns per-session events. Missing: cross-session query, and decisions (notes 0/2083). |
+| AppyTron recon | **Already done** | `~/dev/ad/apps/appytron/CONTEXT.md` is the recon. See `docs/recon.md`. |
+
+For the hackathon specifically, the Angel Eye cross-session index is **not** on the critical path —
+we control project names, so each lineage knows its own sessions. The thin MCP wrapper alone
+unblocks phase 05.
+
+## Layout
+
+```
+raw/    unprocessed intake — verbatim, read it, don't treat it as truth
+docs/   recon.md (the three scaffolds) · system-views.html (the artifact)
+```
+
+`docs/system-views.html` is published as an artifact and **must be kept current** — republish it
+whenever the team, gates, or plan change.
 
 ## Conventions
 
-Inherits the monorepo rules from `~/dev/ad/CLAUDE.md` and `~/dev/.ai-conventions.md`:
-
-- **kebab-case** for markdown filenames (`my-file.md`, never uppercase)
-- Language-specific casing for code (snake_case in Ruby, etc.)
-
-## When the project takes shape
-
-Replace the "Status" section above with, at minimum:
-
-- Build / dev / test commands, including how to run a **single** test
-- The big-picture architecture — the parts you'd only understand after reading several files
-- Anything a hackathon judge or a second contributor would trip over (env vars, external services,
-  demo setup)
+- Inherits `~/dev/ad/CLAUDE.md` and `~/dev/.ai-conventions.md` — **kebab-case** markdown filenames.
+- Any HTML/visual output uses the **AppyDave brand**: load the `brand-dave:brand` skill *and* read
+  `references/appydave/DESIGN.md` and `context-guide.md`. Non-negotiables that have already been got
+  wrong once: light-first for every viewer (`color-scheme: light`, no `prefers-color-scheme: dark`
+  block), real Oswald/Roboto/Bebas embedded as data URIs since the artifact CSP blocks font CDNs,
+  and no invented colours — status colours come from `brand-style-guide.md`.
