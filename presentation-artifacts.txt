@@ -1,141 +1,51 @@
-PRESENTATION ARTIFACTS — Chiang Mai 4 Seasons, Hacker Fund, August 2026
-Team: David Cruwys · Karlen · Ethan Ooi
-Last updated: 2026-08-01
+INTERVIEW COPILOT
+Chiang Mai 4 Seasons · Hacker Fund · August 2026
+David Cruwys · Karlen · Ethan Ooi
 
 
-================================================================================
-!! BEFORE SENDING THIS TO ANYONE !!
-================================================================================
+WHAT WE BUILT
 
-Every claude.ai/code/artifact link below is PRIVATE BY DEFAULT.
+A live research partner for interviews. It listens while the conversation is
+happening, turns it into a structured evidence base, and quietly suggests the
+next question worth asking. The human stays in charge.
 
-Publishing an artifact does NOT share it. Each one must be shared from its own
-page — open the link, hit Share. Until then an organiser clicking it sees
-nothing, and the list reads as broken.
-
-Work down the list and share each one before this file goes out.
+One 20-minute interview produced 45 pieces of evidence, 10 pain points, and a
+scored opportunity — ProofPass, 18/20.
 
 
-================================================================================
-1 · THE APPLICATION — interview-copilot
-================================================================================
+THE PRESENTATION — start here
 
-What it is
-  A local-first research partner that turns a live interview into an evidence
-  base while the conversation is still happening. Five specialist lenses —
-  clarification, opportunity, bias guard, memory, research — read one shared
-  evidence pool and surface the next useful question. The human stays in charge;
-  the software never joins the conversation.
-
-Repository (public)
-  https://github.com/appydave-hackerthons/interview-copilot
-
-The workspace — what the interviewer sees
-  https://claude.ai/code/artifact/f713482e-164b-4e16-a7fa-7771aa2ad4ea
-  Conversation path, live transcript, evidence pool, and the five lenses
-  surfacing live guidance cards.
-
-The report it produced — what comes out
-  https://claude.ai/code/artifact/97b27347-2995-4725-ae67-7fbf7c90f167
-  Pains, key facts, verbatim quotes, unanswered questions, a labelled
-  hypothesis and one validation test.
-
-Built by
-  Ethan Ooi
-
-From one real 20-minute interview
-  157 transcript turns
-  45 evidence items extracted
-  10 pain points · 24 key facts · 10 verbatim quotes · 12 unanswered questions
-  Coverage 4 of 6 criteria — the app marked its own interview incomplete
-  and said which two criteria were missed.
-
-
-================================================================================
-2 · THE STORY DECK  ← START HERE
-================================================================================
-
-Dynamic Interview Copilot — Hackathon Story Arc
   https://claude.ai/code/artifact/13b72de4-f6aa-42ba-b64e-3a66824d24ab
 
-Nine slides, keyboard navigable — use the arrow keys.
-
-  1  What we built ................ Dynamic Interview Copilot
-  2  The problem .................. Problem solvers don't know how to ask
-  3  The solution ................. A copilot that listens, extracts, guides
-  4  What it produces ............. From one interview, an insight report
-  5  The pipeline ................. From interview to scored ideas
-  6  The top idea ................. ProofPass — 18/20
-  7  Live demo .................... See it in action
-  8  How we scored ................ Real · New · Good · Feasible
-  9  What comes next .............. This isn't just for Chiang Mai
-
-Built by
-  Karlen
-
-Also in the repository
-  story-deck-standalone.html    self-contained, images embedded
-  story-deck.html               working version
+  Nine slides. Use the arrow keys.
 
 
-================================================================================
-3 · THE SYSTEM — how the whole thing works
-================================================================================
+THE APP
 
-Five views of the machine that produced the app
-  https://claude.ai/code/artifact/00f219bf-ac4c-4799-94fb-e70d39acacd5
+  https://claude.ai/code/artifact/f713482e-164b-4e16-a7fa-7771aa2ad4ea
 
-  01  The Loop          traces in, artifacts out, artifacts become traces
-  02  Control Plane     five lineages, six phases, one human gate each
-  03  Build Order       what had to exist before day one
-  04  Lineage One       the team interviewed by its own system
-  05  Micro-Apps        what gets built, and where it plugs into the funnel
-
-Repository (public)
-  https://github.com/appydave-hackerthons/08-2026-chiangmai-4seas
+  What the interviewer sees while the conversation is running.
 
 
-================================================================================
-4 · SUPPORTING MATERIAL
-================================================================================
+WHAT IT PRODUCED
 
-Design system — the visual language everything shares
-  https://claude.ai/code/artifact/601c7895-b9f7-443a-b68b-c373ba223692
-  Palette, contrast pairings, typography, and the evidence-provenance rule
-  that keeps AI inference visually distinct from what a person actually said.
+  https://claude.ai/code/artifact/97b27347-2995-4725-ae67-7fbf7c90f167
 
-Interview card — the field guide used on the day
-  https://claude.ai/code/artifact/3593aab0-3e23-43de-a50e-ea1fd6f524ab
-  The question sequence, the probes, and the stopping rule.
-
-In the repository
-  proofpass-card.jpg          the winning opportunity card
-  insight-report.jpg          report screenshot used in the deck
-  docs/board-2026-08-01.md    the funnel as drawn on the whiteboard
-  interview-script.md         Karlen's five-minute interview script
-  demo-script.md              the presentation running order
+  The report from a real interview — pains, facts, quotes, and one next step.
 
 
-================================================================================
-5 · THE ONE-LINE PITCH
-================================================================================
+THE CODE
 
-People already produce valuable traces — conversations, notes, coding sessions.
-This system listens to them, discovers opportunities nobody formally requested,
-lets a human choose which matter, and turns the chosen ones into working
-software.
+  https://github.com/appydave-hackerthons/interview-copilot
 
-The first thing it built was a better version of its own first step.
+  Python, FastAPI, React. Runs locally with: make install && make dev
 
 
-================================================================================
-OPEN ITEMS
-================================================================================
+--------------------------------------------------------------------------------
+Note to us, not for the organisers:
 
-  [ ] Share every artifact link above (see the warning at the top).
-      Six links need sharing: story deck, workspace, report, system views,
-      design system, interview card.
-  [ ] Decide what stays public: both repositories are PUBLIC and contain a
-      participant's full interview transcript. That participant has not agreed
-      to publication. Either make the repos private or redact the transcripts
-      before this list circulates.
+  [ ] The three artifact links are private until shared from each page.
+      Share all three before this goes out.
+
+  [ ] The repo is public and holds a participant's full interview transcript.
+      She has not agreed to publication. Redact or make private first.
