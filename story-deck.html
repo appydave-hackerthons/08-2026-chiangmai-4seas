@@ -25,6 +25,25 @@
   ul { margin-top: 1vw; }
   li { font-size: 1.5vw; line-height: 1.8; }
   .slide-num { position: fixed; bottom: 2vw; right: 2vw; font-size: 1vw; color: #ccc; z-index: 10; }
+  .card { background: #f8f9fa; border-radius: 1vw; padding: 2.5vw; margin-top: 1.5vw; }
+  .card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1vw; }
+  .card-title { font-size: 2.2vw; font-weight: 700; }
+  .card-score { font-size: 1.5vw; font-weight: 700; color: #0a8f6c; }
+  .card-tag { display: inline-block; background: #0a8f6c; color: #fff; padding: 0.3vw 0.8vw; border-radius: 0.3vw; font-size: 0.9vw; font-weight: 600; margin-bottom: 1vw; }
+  .card-body { font-size: 1.3vw; line-height: 1.6; color: #444; }
+  .card-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; margin-top: 1.5vw; }
+  .card-col h4 { font-size: 1.2vw; font-weight: 700; margin-bottom: 0.8vw; }
+  .card-col ol, .card-col ul { margin-left: 1.2vw; }
+  .card-col li { font-size: 1.1vw; line-height: 1.6; margin-bottom: 0.4vw; }
+  .rebuttal { border-left: 3px solid #0a8f6c; padding-left: 1vw; margin-top: 1vw; }
+  .rebuttal p { font-size: 1.1vw; line-height: 1.5; color: #555; }
+  .rebuttal em { font-weight: 600; color: #333; }
+  .scores-row { display: flex; gap: 1.5vw; margin-top: 1.5vw; }
+  .score-box { background: #fff; border: 1px solid #e0e0e0; border-radius: 0.5vw; padding: 1vw 1.2vw; min-width: 10vw; }
+  .score-box .score-label { font-size: 0.9vw; color: #888; text-transform: uppercase; letter-spacing: 0.1vw; }
+  .score-box .score-num { font-size: 2vw; font-weight: 700; color: #0a8f6c; }
+  .score-box .score-why { font-size: 0.9vw; color: #666; margin-top: 0.3vw; }
+  .signal { font-size: 1.1vw; color: #888; font-style: italic; margin-top: 1.5vw; }
 </style>
 <script>
 document.addEventListener('keydown', function(e) {
@@ -95,7 +114,64 @@ document.addEventListener('keydown', function(e) {
   <p style="margin-top: 2vw;" class="small">Each interview produces structured evidence. Insights become opportunities. Opportunities become ideas. Ideas are scored against the judging criteria. The best one gets built — then validated with the person you interviewed.</p>
 </div>
 
-<!-- SLIDE 5: The Demo -->
+<!-- SLIDE 5: ProofPass — the idea that scored highest -->
+<div class="slide">
+  <div class="label">The top idea · 18/20</div>
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-tag">Promise accountability</div>
+        <div class="card-title">1. ProofPass</div>
+      </div>
+      <div class="card-score">18/20</div>
+    </div>
+    <div class="card-body">
+      Turns an event advertisement into a public promise receipt. Organizers identify the specific experiences they are selling — a workshop, cultural demonstration, or local host — and attach recent, time-stamped proof. Attendees confirm each promise after the event instead of leaving one vague star rating.
+    </div>
+    <div class="card-cols">
+      <div class="card-col">
+        <h4>Core loop</h4>
+        <ol>
+          <li>Paste an event link or poster — the app extracts concrete promises into a checklist</li>
+          <li>The organizer supplies recent proof for each item, with provenance and date shown</li>
+          <li>After attending, people confirm "delivered," "partly delivered," or "missing" — creating a claim-level track record</li>
+        </ol>
+      </div>
+      <div class="card-col">
+        <h4>Most common rebuttal</h4>
+        <div class="rebuttal">
+          <p><em>"I can already ask a friend or read Facebook comments."</em></p>
+          <p>Friends and comments give scattered anecdotes. ProofPass makes the exact advertised claims comparable before the trip and accountable afterward — while still showing uncertainty when evidence is thin.</p>
+        </div>
+      </div>
+    </div>
+    <div class="signal">Interview signal: the Japanese festival promised culture but felt like a food festival with contemporary performance. The mismatch was between a specific expectation and what was actually delivered.</div>
+    <div class="scores-row">
+      <div class="score-box">
+        <div class="score-label">Real</div>
+        <div class="score-num">5/5</div>
+        <div class="score-why">Directly targets the promise-versus-reality failure</div>
+      </div>
+      <div class="score-box">
+        <div class="score-label">New</div>
+        <div class="score-num">4/5</div>
+        <div class="score-why">Verifies individual claims, not the whole event</div>
+      </div>
+      <div class="score-box">
+        <div class="score-label">Good</div>
+        <div class="score-num">5/5</div>
+        <div class="score-why">Rewards honest organizers and informed attendance</div>
+      </div>
+      <div class="score-box">
+        <div class="score-label">Feasible</div>
+        <div class="score-num">4/5</div>
+        <div class="score-why">Link parsing, uploads, and structured feedback fit an MVP</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: The Demo -->
 <div class="slide">
   <div class="label">Live demo</div>
   <h2>See it <span class="accent">in action</span></h2>
@@ -103,7 +179,7 @@ document.addEventListener('keydown', function(e) {
   <p class="small" style="margin-top: 2vw;">The copilot is built with Whisper for local transcription, FastAPI backend, React frontend, and multi-lens AI analysis.</p>
 </div>
 
-<!-- SLIDE 6: The Judging Criteria -->
+<!-- SLIDE 7: The Judging Criteria -->
 <div class="slide">
   <div class="label">How we scored our ideas</div>
   <h2>Scored against <span class="accent">the criteria</span></h2>
@@ -127,7 +203,7 @@ document.addEventListener('keydown', function(e) {
   </div>
 </div>
 
-<!-- SLIDE 7: The Close -->
+<!-- SLIDE 8: The Close -->
 <div class="slide">
   <div class="label">What comes next</div>
   <h2>This isn't just for <span class="accent">Chiang Mai</span></h2>
