@@ -1,0 +1,725 @@
+<title>Chiang Mai 4 Seasons — Three Views</title>
+
+<style>
+  :root {
+    --cream:      #faf5ec;
+    --surface:    #f0ebe4;
+    --linen:      #e8e0d4;
+    --ink:        #342d2d;
+    --muted:      #7a6e5e;
+    --border:     #d4cdc4;
+    --yellow:     #ffde59;
+    --amber:      #c8841a;
+    --gold:       #ccba9d;
+    --chrome:     #1a1515;
+
+    --ok:         #5d7c4f;
+    --active:     #c8841a;
+    --blocked:    #b5524a;
+    --pending:    #c3bbb1;
+
+    --shadow:     0 1px 2px rgba(52,45,45,.06);
+
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+    --max: 1180px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cream:   #1a1515;
+      --surface: #221d1b;
+      --linen:   #2b2422;
+      --ink:     #faf5ec;
+      --muted:   #a89a8c;
+      --border:  #423834;
+      --gold:    #ccba9d;
+      --ok:      #7fa06d;
+      --active:  #e0a24a;
+      --blocked: #d1706a;
+      --pending: #574c47;
+      --shadow:  0 1px 2px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --cream:   #1a1515;
+    --surface: #221d1b;
+    --linen:   #2b2422;
+    --ink:     #faf5ec;
+    --muted:   #a89a8c;
+    --border:  #423834;
+    --gold:    #ccba9d;
+    --ok:      #7fa06d;
+    --active:  #e0a24a;
+    --blocked: #d1706a;
+    --pending: #574c47;
+    --shadow:  0 1px 2px rgba(0,0,0,.3);
+  }
+  :root[data-theme="light"] {
+    --cream:   #faf5ec;
+    --surface: #f0ebe4;
+    --linen:   #e8e0d4;
+    --ink:     #342d2d;
+    --muted:   #7a6e5e;
+    --border:  #d4cdc4;
+    --ok:      #5d7c4f;
+    --active:  #c8841a;
+    --blocked: #b5524a;
+    --pending: #c3bbb1;
+    --shadow:  0 1px 2px rgba(52,45,45,.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- header ---------- */
+
+  header { border-bottom: 1px solid var(--border); }
+
+  .masthead {
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    gap: 8px 20px; padding: 26px 0 22px;
+  }
+
+  .wordmark {
+    font-weight: 800; font-size: 19px;
+    letter-spacing: .04em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .wordmark .a { color: var(--gold); }
+  .wordmark .d { color: var(--amber); }
+  @media (prefers-color-scheme: dark) { .wordmark .d { color: var(--yellow); } }
+  :root[data-theme="dark"] .wordmark .d { color: var(--yellow); }
+  :root[data-theme="light"] .wordmark .d { color: var(--amber); }
+
+  .masthead h1 {
+    margin: 0; font-size: 15px; font-weight: 600;
+    letter-spacing: .01em;
+  }
+  .masthead .meta {
+    margin-left: auto; font-family: var(--mono);
+    font-size: 11.5px; color: var(--muted);
+    letter-spacing: .02em; white-space: nowrap;
+  }
+
+  /* ---------- tabs ---------- */
+
+  .tabs {
+    display: flex; gap: 4px;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    appearance: none; border: 0; background: none;
+    color: var(--muted); cursor: pointer;
+    font-family: var(--sans); font-size: 11.5px; font-weight: 700;
+    letter-spacing: .11em; text-transform: uppercase;
+    padding: 13px 16px 12px; white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color .12s ease, border-color .12s ease;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab[aria-selected="true"] {
+    color: var(--ink);
+    border-bottom-color: var(--yellow);
+  }
+  .tab:focus-visible {
+    outline: 2px solid var(--amber); outline-offset: -3px; border-radius: 2px;
+  }
+  .tab .n {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--muted); margin-right: 7px;
+  }
+
+  /* ---------- panel ---------- */
+
+  main { padding: 34px 0 72px; }
+  [role="tabpanel"][hidden] { display: none; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: .13em;
+    color: var(--amber); margin: 0 0 9px;
+  }
+  .panel-title {
+    margin: 0 0 8px; font-size: 26px; font-weight: 700;
+    letter-spacing: -.015em; text-wrap: balance;
+  }
+  .lede {
+    margin: 0 0 30px; max-width: 64ch;
+    color: var(--muted); font-size: 15.5px;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  .stage {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 30px 26px;
+    overflow-x: auto;
+  }
+
+  /* ---------- view 1 : the loop ---------- */
+
+  .loop { min-width: 660px; display: grid; gap: 0; justify-items: stretch; }
+
+  .rail {
+    display: flex; align-items: center; gap: 14px;
+    padding: 13px 16px; border-radius: 3px;
+    border: 1px solid var(--border); background: var(--linen);
+  }
+  .rail.log   { border-left: 4px solid var(--amber); }
+  .rail.eye   { border-left: 4px solid var(--ok); }
+
+  .rail .tag {
+    font-size: 12px; font-weight: 800;
+    letter-spacing: .09em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .rail .desc { font-size: 13px; color: var(--muted); }
+  .rail .srcs {
+    margin-left: auto; font-family: var(--mono);
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+  }
+
+  .drop {
+    justify-self: start; width: 2px; height: 26px;
+    background: var(--border); margin-left: 34px;
+    position: relative;
+  }
+  .drop::after {
+    content: ""; position: absolute; bottom: -1px; left: -4px;
+    border: 5px solid transparent; border-top-color: var(--border);
+  }
+  .drop.up::after {
+    bottom: auto; top: -1px;
+    border-top-color: transparent; border-bottom-color: var(--border);
+  }
+  .drop.far { margin-left: auto; margin-right: 128px; }
+
+  .spine {
+    display: flex; align-items: stretch; gap: 0;
+    border: 1px solid var(--border); border-radius: 3px;
+    background: var(--cream); overflow: hidden;
+  }
+  .step {
+    flex: 1; padding: 15px 12px 14px;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 5px;
+    min-width: 0;
+  }
+  .step:last-child { border-right: 0; }
+  .step .ord {
+    font-family: var(--mono); font-size: 10.5px;
+    color: var(--amber); letter-spacing: .05em;
+  }
+  .step .name {
+    font-size: 12.5px; font-weight: 800;
+    letter-spacing: .05em; text-transform: uppercase;
+    line-height: 1.25;
+  }
+  .step .note { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+  .step.gate { background: var(--linen); position: relative; }
+  .step.gate .name::after {
+    content: " ★"; color: var(--amber);
+  }
+  :root[data-theme="dark"] .step.gate .name::after { color: var(--yellow); }
+  @media (prefers-color-scheme: dark) { .step.gate .name::after { color: var(--yellow); } }
+  :root[data-theme="light"] .step.gate .name::after { color: var(--amber); }
+
+  .returns {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 22px; padding: 12px 16px;
+    border: 1px dashed var(--border); border-radius: 3px;
+    font-size: 13px; color: var(--muted);
+  }
+  .returns .arrow {
+    font-family: var(--mono); color: var(--amber);
+    font-size: 15px; white-space: nowrap;
+  }
+
+  /* ---------- view 2 : control plane ---------- */
+
+  .grid-wrap { min-width: 760px; }
+
+  table.plane { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.plane th, table.plane td {
+    padding: 0; text-align: left;
+  }
+  table.plane thead th {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); font-weight: 400;
+    padding: 0 6px 10px; vertical-align: bottom;
+  }
+  table.plane thead th.who { padding-left: 0; }
+  table.plane tbody th {
+    font-weight: 600; font-size: 13px;
+    padding: 9px 18px 9px 0; white-space: nowrap;
+    border-top: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  table.plane tbody td {
+    padding: 9px 3px; border-top: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  table.plane tbody td.next {
+    padding-left: 18px; color: var(--muted); font-size: 12.5px;
+    white-space: nowrap;
+  }
+
+  .cell {
+    height: 10px; border-radius: 2px; background: var(--pending);
+  }
+  .cell.ok      { background: var(--ok); }
+  .cell.active  { background: var(--active); }
+  .cell.blocked { background: var(--blocked); }
+
+  .gate-col { position: relative; }
+  .gate-mark {
+    display: block; text-align: center;
+    font-size: 10px; color: var(--amber); margin-top: 3px;
+    font-family: var(--mono);
+  }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px 22px;
+    margin-top: 22px; padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .swatch { width: 20px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  /* ---------- view 3 : build order ---------- */
+
+  .cols {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    align-items: start;
+  }
+
+  .col > h3 {
+    margin: 0 0 4px; font-size: 11px; font-weight: 800;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  .col > .sub {
+    margin: 0 0 14px; font-size: 12px; color: var(--muted);
+    font-family: var(--mono);
+  }
+  .col.gate-col-a > h3 { color: var(--blocked); }
+  .col.mid > h3       { color: var(--active); }
+  .col.late > h3      { color: var(--ok); }
+
+  .card {
+    background: var(--cream); border: 1px solid var(--border);
+    border-radius: 3px; padding: 13px 14px; margin-bottom: 10px;
+    box-shadow: var(--shadow);
+  }
+  .card.risk { border-left: 4px solid var(--blocked); }
+  .card.work { border-left: 4px solid var(--active); }
+  .card.later{ border-left: 4px solid var(--ok); }
+
+  .card h4 {
+    margin: 0 0 5px; font-size: 13.5px; font-weight: 700;
+    letter-spacing: .005em;
+  }
+  .card p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .card .weight {
+    display: inline-block; margin-top: 8px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border); border-radius: 2px;
+    padding: 2px 7px;
+  }
+
+  .callout {
+    margin-top: 26px; padding: 16px 18px;
+    background: var(--linen); border: 1px solid var(--border);
+    border-left: 4px solid var(--amber); border-radius: 3px;
+    font-size: 13.5px; max-width: 74ch;
+  }
+  .callout strong { font-weight: 700; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 20px 0 40px;
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    display: flex; flex-wrap: wrap; gap: 6px 20px;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .stage { padding: 20px 16px; }
+    .panel-title { font-size: 22px; }
+    .masthead .meta { margin-left: 0; width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="masthead">
+      <div class="wordmark"><span class="a">Appy</span><span class="d">Dave</span></div>
+      <h1>Opportunity Discovery &amp; Realisation Engine</h1>
+      <div class="meta">CHIANG MAI · 4 SEASONS · AUG 2026 · HACKER FUND</div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="System views">
+      <button class="tab" role="tab" id="tab-loop" aria-controls="panel-loop" aria-selected="true">
+        <span class="n">01</span>The Loop
+      </button>
+      <button class="tab" role="tab" id="tab-plane" aria-controls="panel-plane" aria-selected="false" tabindex="-1">
+        <span class="n">02</span>Control Plane
+      </button>
+      <button class="tab" role="tab" id="tab-order" aria-controls="panel-order" aria-selected="false" tabindex="-1">
+        <span class="n">03</span>Build Order
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ VIEW 1 ============ -->
+  <section role="tabpanel" id="panel-loop" aria-labelledby="tab-loop" tabindex="0">
+    <p class="eyebrow">Answers — what is this thing?</p>
+    <h2 class="panel-title">Traces in, artifacts out, artifacts become traces</h2>
+    <p class="lede">
+      Two evidence sources enter from opposite ends and do different jobs.
+      <strong>Captain's Log</strong> is upstream — it tells us what might be worth building.
+      <strong>Angel Eye</strong> is downstream — it tells us what actually happened while it was
+      being built. The output becomes new input, which is what makes this an engine rather
+      than a pipeline.
+    </p>
+
+    <div class="stage">
+      <div class="loop">
+
+        <div class="rail log">
+          <span class="tag">Captain's Log</span>
+          <span class="desc">Human traces — what people said, wanted, struggled with</span>
+          <span class="srcs">PLAUD · OMI · WHISPER FLOW</span>
+        </div>
+
+        <div class="drop" aria-hidden="true"></div>
+
+        <div class="spine">
+          <div class="step">
+            <span class="ord">01</span>
+            <span class="name">Discover</span>
+            <span class="note">Interview, transcript, fact sheet</span>
+          </div>
+          <div class="step gate">
+            <span class="ord">02</span>
+            <span class="name">Evaluate</span>
+            <span class="note">Cards, ranking — a human picks</span>
+          </div>
+          <div class="step">
+            <span class="ord">03</span>
+            <span class="name">Define</span>
+            <span class="note">Tech-agnostic requirements</span>
+          </div>
+          <div class="step">
+            <span class="ord">04</span>
+            <span class="name">Build</span>
+            <span class="note">AppyTron app, own repo</span>
+          </div>
+          <div class="step">
+            <span class="ord">05</span>
+            <span class="name">Analyse</span>
+            <span class="note">Read back the build itself</span>
+          </div>
+          <div class="step">
+            <span class="ord">06</span>
+            <span class="name">Productise</span>
+            <span class="note">Origin story, page, portfolio</span>
+          </div>
+        </div>
+
+        <div class="drop up far" aria-hidden="true"></div>
+
+        <div class="rail eye">
+          <span class="tag">Angel Eye</span>
+          <span class="desc">Machine traces — what actually happened during the build</span>
+          <span class="srcs">CLAUDE CODE · CODEX SESSIONS</span>
+        </div>
+
+      </div>
+
+      <div class="returns">
+        <span class="arrow">└─ 06 ──▶ 01</span>
+        <span>Every artifact, reaction and coding session becomes a new trace — the next
+          round of discovery reads them.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>The framing that must not be lost:</strong> this is not a router, a project-management
+      tool, a prompt chain or a code generator. The claim is that people already produce valuable
+      traces, and that opportunities can be discovered in them <em>before anyone has formally
+      requested anything</em>.
+    </div>
+  </section>
+
+  <!-- ============ VIEW 2 ============ -->
+  <section role="tabpanel" id="panel-plane" aria-labelledby="tab-plane" tabindex="0" hidden>
+    <p class="eyebrow">Answers — where is everything right now?</p>
+    <h2 class="panel-title">Five lineages, six phases, one human gate each</h2>
+    <p class="lede">
+      Each participant is an isolated but structurally identical lineage — never merged, so
+      attribution stays clear. This is the minimum control plane described in the plan, and the
+      state shown below is <strong>illustrative</strong>, not live.
+    </p>
+
+    <div class="stage">
+      <div class="grid-wrap">
+        <table class="plane">
+          <thead>
+            <tr>
+              <th class="who" scope="col">Lineage</th>
+              <th scope="col">Discover</th>
+              <th scope="col">Evaluate</th>
+              <th scope="col">Define</th>
+              <th scope="col">Build</th>
+              <th scope="col">Analyse</th>
+              <th scope="col">Productise</th>
+              <th scope="col">Next action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">David + Carlan</th>
+              <td><div class="cell ok"></div></td>
+              <td class="gate-col"><div class="cell ok"></div><span class="gate-mark">★</span></td>
+              <td><div class="cell ok"></div></td>
+              <td><div class="cell active"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td class="next">North-star artifact building</td>
+            </tr>
+            <tr>
+              <th scope="row">Participant 2</th>
+              <td><div class="cell ok"></div></td>
+              <td class="gate-col"><div class="cell ok"></div><span class="gate-mark">★</span></td>
+              <td><div class="cell active"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td class="next">Writing requirements</td>
+            </tr>
+            <tr>
+              <th scope="row">Participant 3</th>
+              <td><div class="cell ok"></div></td>
+              <td class="gate-col"><div class="cell active"></div><span class="gate-mark">★</span></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td class="next">Awaiting selection</td>
+            </tr>
+            <tr>
+              <th scope="row">Participant 4</th>
+              <td><div class="cell active"></div></td>
+              <td class="gate-col"><div class="cell"></div><span class="gate-mark">★</span></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td class="next">Transcript processing</td>
+            </tr>
+            <tr>
+              <th scope="row">Participant 5</th>
+              <td><div class="cell blocked"></div></td>
+              <td class="gate-col"><div class="cell"></div><span class="gate-mark">★</span></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td><div class="cell"></div></td>
+              <td class="next">Interview not booked</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="legend">
+          <span><i class="swatch" style="background:var(--ok)"></i> complete</span>
+          <span><i class="swatch" style="background:var(--active)"></i> in progress</span>
+          <span><i class="swatch" style="background:var(--blocked)"></i> blocked</span>
+          <span><i class="swatch" style="background:var(--pending)"></i> not started</span>
+          <span>★ human decision gate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Deliberate constraint:</strong> a pipeline never advances just because a file exists.
+      Every phase has a quality gate, and the ranking score organises attention — it does not make
+      the choice. Building this dashboard is also a risk: the plan explicitly warns against letting
+      it consume time the actual pipelines need.
+    </div>
+  </section>
+
+  <!-- ============ VIEW 3 ============ -->
+  <section role="tabpanel" id="panel-order" aria-labelledby="tab-order" tabindex="0" hidden>
+    <p class="eyebrow">Answers — what do we do first?</p>
+    <h2 class="panel-title">The pre-work is the risk, not the builds</h2>
+    <p class="lede">
+      Roughly forty-five skills, a plugin and two MCP integrations sit upstream of day one.
+      Three items gate everything else, and <strong>all three are currently unverified</strong> —
+      they are assumptions inherited from the conversation, not confirmed capabilities.
+    </p>
+
+    <div class="stage">
+      <div class="cols">
+
+        <div class="col gate-col-a">
+          <h3>Gates everything</h3>
+          <p class="sub">verify before building on top</p>
+
+          <div class="card risk">
+            <h4>Captain's Log via MCP</h4>
+            <p>Can we list recordings, pull transcripts, read tags and search by participant?
+              Tool names are unconfirmed — inspect the schema, don't assume it.</p>
+            <span class="weight">Unverified · blocks ingestion</span>
+          </div>
+
+          <div class="card risk">
+            <h4>Angel Eye via MCP</h4>
+            <p>Can we list sessions by project, retrieve hook events and tool calls, and find
+              failures and decisions? Same rule — discover, don't invent.</p>
+            <span class="weight">Unverified · blocks phase 05</span>
+          </div>
+
+          <div class="card risk">
+            <h4>AppyTron recon</h4>
+            <p>A focused skill studies the Electron boilerplate first and records structure,
+              commands, packaging and known build failures.</p>
+            <span class="weight">Unverified · blocks all builds</span>
+          </div>
+        </div>
+
+        <div class="col mid">
+          <h3>Then — the skill set</h3>
+          <p class="sub">single responsibility, one plugin</p>
+
+          <div class="card work">
+            <h4>Ingestion &amp; evidence</h4>
+            <p>Transcript normaliser, speaker validation, fact extractor, fact-sheet builder,
+              ambiguity detector.</p>
+            <span class="weight">~10 skills</span>
+          </div>
+
+          <div class="card work">
+            <h4>Opportunity &amp; selection</h4>
+            <p>Territory extractor, candidate generator, deduplicator, jobs-to-be-done framer,
+              card builder, ranker, selection record.</p>
+            <span class="weight">~10 skills · highest value</span>
+          </div>
+
+          <div class="card work">
+            <h4>Requirements &amp; handover</h4>
+            <p>Tech-agnostic requirements, acceptance criteria, validator, plus the four
+              phase-boundary handover packages.</p>
+            <span class="weight">~10 skills</span>
+          </div>
+
+          <div class="card work">
+            <h4>Rehearsal</h4>
+            <p>One synthetic interview and one real David–Carlan run, all the way through to
+              requirements. The diagnostic rule: if the cards are weak, fix the
+              <em>questions</em> before touching the scoring.</p>
+            <span class="weight">Proves the whole chain</span>
+          </div>
+        </div>
+
+        <div class="col late">
+          <h3>During &amp; after</h3>
+          <p class="sub">safe to defer</p>
+
+          <div class="card later">
+            <h4>Five parallel pipelines</h4>
+            <p>Separate sessions per participant, continuity through handover artifacts rather
+              than one enormous context window.</p>
+            <span class="weight">Day of</span>
+          </div>
+
+          <div class="card later">
+            <h4>Angel Eye post-build</h4>
+            <p>Reads coding sessions back for decisions, divergence, failures and the notable
+              moments worth putting in an origin story.</p>
+            <span class="weight">Day of · needs real builds</span>
+          </div>
+
+          <div class="card later">
+            <h4>Productisation</h4>
+            <p>Origin stories, participant project pages, portfolio site, pitch content — all
+              generated from evidence that only exists once builds are done.</p>
+            <span class="weight">Late</span>
+          </div>
+
+          <div class="card later">
+            <h4>Control plane</h4>
+            <p>Useful, but capped. A conceptual mock-up is an acceptable outcome.</p>
+            <span class="weight">Stretch</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Honest success bar:</strong> five interviews, five fact sheets, five selections and
+      five requirements packages — but only <strong>three to five runnable apps</strong> and
+      <strong>one</strong> polished end-to-end demo. Ten finished applications is not the target,
+      and pretending otherwise is the fastest way to lose the event.
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>SOURCE — raw/2026-07-31-carlan-hackathon-plan-prompt.md</span>
+  <span>STATE — pre-planning, most items unconfirmed</span>
+</footer>
+
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var next = tabs[(i + d + tabs.length) % tabs.length];
+        select(next);
+        next.focus();
+      });
+    });
+  })();
+</script>
