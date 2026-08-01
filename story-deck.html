@@ -15,9 +15,10 @@
   .small { font-size: 1.2vw; color: #666; }
   .label { font-size: 0.9vw; text-transform: uppercase; letter-spacing: 0.15vw; color: #999; margin-bottom: 0.8vw; }
   .accent { color: #0a8f6c; }
-  .pipeline { display: flex; align-items: center; gap: 0; margin-top: 2vw; flex-wrap: wrap; }
-  .pipe-step { background: #f0f7f5; padding: 1vw 1.5vw; border-radius: 0.5vw; font-size: 1.1vw; font-weight: 600; }
-  .pipe-arrow { font-size: 1.5vw; color: #0a8f6c; margin: 0 0.3vw; }
+  .pipeline { display: flex; flex-direction: column; gap: 0.6vw; margin-top: 2vw; max-width: 50vw; }
+  .pipe-step { background: #f0f7f5; padding: 1vw 1.5vw; border-radius: 0.5vw; font-size: 1.2vw; font-weight: 600; display: flex; align-items: center; gap: 1vw; }
+  .pipe-num { background: #0a8f6c; color: #fff; width: 2vw; height: 2vw; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1vw; font-weight: 700; flex-shrink: 0; }
+  .pipe-arrow { font-size: 1.5vw; color: #0a8f6c; margin: 0 0 0 1vw; }
   .criteria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; margin-top: 2vw; }
   .criterion { padding: 1.5vw; border-left: 4px solid #0a8f6c; }
   .criterion h3 { font-size: 1.5vw; margin-bottom: 0.5vw; }
@@ -103,13 +104,19 @@ document.addEventListener('keydown', function(e) {
   <div class="label">The pipeline</div>
   <h2>From interview to <span class="accent">scored ideas</span></h2>
   <div class="pipeline">
-    <div class="pipe-step">Interview</div><div class="pipe-arrow">→</div>
-    <div class="pipe-step">Insights</div><div class="pipe-arrow">→</div>
-    <div class="pipe-step">JTBD Opportunities</div><div class="pipe-arrow">→</div>
-    <div class="pipe-step">Ideas</div><div class="pipe-arrow">→</div>
-    <div class="pipe-step">Scored (Real / New / Good / Feasible)</div><div class="pipe-arrow">→</div>
-    <div class="pipe-step">Best → Prototype</div><div class="pipe-arrow">→</div>
-    <div class="pipe-step">Feedback loop</div>
+    <div class="pipe-step"><span class="pipe-num">1</span> Interview</div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step"><span class="pipe-num">2</span> Extract insights, pains, workarounds</div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step"><span class="pipe-num">3</span> Identify JTBD opportunities</div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step"><span class="pipe-num">4</span> Generate ideas</div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step"><span class="pipe-num">5</span> Score against Real / New / Good / Feasible</div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step"><span class="pipe-num">6</span> Pick the best → build prototype</div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step"><span class="pipe-num">7</span> Go back to the person → get feedback</div>
   </div>
   <p style="margin-top: 2vw;" class="small">Each interview produces structured evidence. Insights become opportunities. Opportunities become ideas. Ideas are scored against the judging criteria. The best one gets built — then validated with the person you interviewed.</p>
 </div>
