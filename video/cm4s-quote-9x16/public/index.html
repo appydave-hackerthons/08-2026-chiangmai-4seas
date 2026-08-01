@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Local woff2 only — the render CSP blocks font CDNs. */
+      @font-face { font-family: 'Oswald'; src: url('fonts/Oswald-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Oswald'; src: url('fonts/Oswald-600.woff2') format('woff2'); font-weight: 600; font-display: block; }
+      @font-face { font-family: 'Roboto'; src: url('fonts/Roboto-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Roboto'; src: url('fonts/Roboto-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+      @font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+
+      :root {
+        /* Source of truth: CM4S DESIGN.md → a projection of AppyDave.
+           Do not invent values here. If a colour is missing, the design is wrong. */
+        color-scheme: light;
+        --bg:       #faf5ec;  /* warm cream page */
+        --text:     #342d2d;  /* warm brown ink — never pure black */
+        --accent-0: #ccba9d;  /* gold — rules, kickers */
+        --accent-1: #ffde59;  /* yellow — RESERVED for the human gate. Unused here */
+        --accent-2: #c8841a;  /* amber — sequences, the light-safe logo's "Dave" */
+        --muted:    #7a6e5e;  /* secondary labels, the receding first saying */
+        --dark:     #25201e;  /* the ONE dark beat — 8.4s–11.9s, nowhere else */
+      }
+
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0; width: 100%; height: 100%;
+        overflow: hidden; background: #faf5ec;
+        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      .quote {
+        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        letter-spacing: -0.5px;
+      }
+      .label {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 600; text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="cm4s-quote"
+      data-start="0"
+      data-duration="15"
+      data-fps="30"
+      data-width="1080"
+      data-height="1920"
+      style="position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--bg);"
+    >
+      <!-- ══ BEAT A · the repetition [0.0–8.4] ═══════════════════════════════════
+           One line, said twice. The first saying holds plain; the second arrives
+           heavier while the first recedes to muted. Nothing else moves.        -->
+      <section
+        id="beat-a-repetition"
+        class="clip"
+        data-start="0"
+        data-duration="8.4"
+        data-track-index="1"
+        style="position: absolute; inset: 0; background: var(--bg);"
+      >
+        <div id="rule"
+          style="position: absolute; left: 96px; top: 520px; height: 6px; width: 0; background: var(--accent-0); border-radius: 3px;"></div>
+
+        <div id="q1a" class="quote"
+          style="position: absolute; left: 96px; top: 600px; width: 888px; font-size: 78px; font-weight: 400; line-height: 1.2; color: var(--text); opacity: 0;"
+        >I don&rsquo;t want to waste my time.</div>
+
+        <div id="q1b" class="quote"
+          style="position: absolute; left: 96px; top: 844px; width: 888px; font-size: 96px; font-weight: 700; line-height: 1.14; color: var(--text); opacity: 0;"
+        >I don&rsquo;t want to waste my time.</div>
+
+        <div id="attrib" class="label"
+          style="position: absolute; left: 96px; top: 1132px; width: 888px; font-size: 26px; letter-spacing: 5px; color: var(--muted); opacity: 0;"
+        >Participant 001 &nbsp;&middot;&nbsp; Chiang Mai</div>
+      </section>
+
+      <!-- ══ BEAT B · the friction [8.4–11.9] ════════════════════════════════════
+           Hard cut in, hard cut out. The one permitted dark beat in the piece. -->
+      <section
+        id="beat-b-friction"
+        class="clip"
+        data-start="8.4"
+        data-duration="3.5"
+        data-track-index="2"
+        style="position: absolute; inset: 0; background: var(--dark);"
+      >
+        <div id="q2" class="quote"
+          style="position: absolute; left: 96px; top: 780px; width: 888px; font-size: 64px; font-weight: 400; line-height: 1.3; color: var(--bg); opacity: 0;"
+        >But it&rsquo;s kind of like, it&rsquo;s not look like what they said.</div>
+      </section>
+
+      <!-- ══ BEAT C · what she built [11.9–15.0] ═════════════════════════════════
+           Not an app — a friend who goes first. Logo last, small, light-safe.  -->
+      <section
+        id="beat-c-workaround"
+        class="clip"
+        data-start="11.9"
+        data-duration="3.1"
+        data-track-index="1"
+        style="position: absolute; inset: 0; background: var(--bg);"
+      >
+        <div id="q3" class="quote"
+          style="position: absolute; left: 96px; top: 780px; width: 888px; font-size: 86px; font-weight: 700; line-height: 1.16; color: var(--text); opacity: 0;"
+        >So I just let somebody else go there first.</div>
+
+        <!-- Light-safe two-tone lockup (DESIGN.md §2b fallback): the dark chip is
+             wrong on a piece that already spent its dark element at 8.4s. -->
+        <div id="logo"
+          style="position: absolute; left: 96px; top: 1668px; font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; font-size: 46px; letter-spacing: 3px; line-height: 1; opacity: 0;"
+        ><span style="color: #342d2d;">Appy</span><span style="color: #c8841a;">Dave</span></div>
+      </section>
+
+      <script src="vendor/gsap.min.js"></script>
+      <script>
+        (function () {
+          const tl = window.gsap.timeline({ paused: true });
+
+          // ── BEAT A ──────────────────────────────────────────────────────────
+          // A breath first: the gold hairline draws before any word appears.
+          tl.fromTo('#rule', { width: 0 }, { width: 300, duration: 0.5, ease: 'power2.out' }, 0.15);
+
+          // First saying — plain, 400 weight, then dead still for 3.2s.
+          tl.fromTo('#q1a', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.6);
+
+          // The edit's one real move: the SAME line returns bigger and heavier
+          // at the exact instant the first recedes. Emphasis by weight, never colour.
+          tl.fromTo('#q1b', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, 4.2);
+          tl.to('#q1a', { color: '#7a6e5e', duration: 0.55, ease: 'power2.inOut' }, 4.2);
+
+          // Attribution lands after the words, never before.
+          tl.fromTo('#attrib', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 7.5);
+
+          // ── BEAT B ──────────────────────────────────────────────────────────
+          // No transition out of A and none back into C — the clip boundary at
+          // 8.4 / 11.9 IS the cut.
+          tl.fromTo('#q2', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 8.55);
+
+          // ── BEAT C ──────────────────────────────────────────────────────────
+          tl.fromTo('#q3', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, 12.05);
+          tl.fromTo('#logo', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 13.7);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines['cm4s-quote'] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>

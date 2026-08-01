@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face { font-family: 'Oswald'; src: url('fonts/Oswald-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Oswald'; src: url('fonts/Oswald-600.woff2') format('woff2'); font-weight: 600; font-display: block; }
+      @font-face { font-family: 'Oswald'; src: url('fonts/Oswald-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+      @font-face { font-family: 'Roboto'; src: url('fonts/Roboto-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Roboto'; src: url('fonts/Roboto-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+      @font-face { font-family: 'Roboto Mono'; src: url('fonts/RobotoMono-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Roboto Mono'; src: url('fonts/RobotoMono-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+
+      /* Source of truth: CM4S DESIGN.md -> a projection of AppyDave. Nothing invented here. */
+      :root {
+        color-scheme: light;
+        --brand-brown:        #342d2d;
+        --brand-gold:         #ccba9d;
+        --brand-yellow:       #ffde59;
+        --brand-amber:        #c8841a;
+        --brand-muted:        #7a6e5e;
+        --brand-near-white:   #faf5ec;
+        --brand-surface:      #f0ebe4;
+        --brand-linen:        #e8e0d4;
+        --brand-border:       #d4cdc4;
+        --brand-chrome:       #1a1515;
+        --brand-dark-surface: #25201e;
+        --brand-blue:         #2E91FC;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0; width: 100%; height: 100%;
+        overflow: hidden; background: #faf5ec;
+        font-family: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+      }
+      #stage { position: relative; width: 100%; height: 100%; overflow: hidden; background: #faf5ec; }
+      .card-host { position: absolute; pointer-events: none; overflow: hidden; }
+      .card-host .card { position: relative; width: 100%; height: 100%; overflow: hidden; }
+
+      /* ── the board ─────────────────────────────────────────────────────── */
+      .board { position: absolute; inset: 0; background: var(--brand-near-white); }
+
+      .kicker { position: absolute; left: 72px; top: 54px;
+        font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 22px;
+        letter-spacing: 7px; text-transform: uppercase; color: var(--brand-muted); }
+      .title { position: absolute; left: 72px; top: 84px;
+        font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 58px; line-height: 1.0;
+        letter-spacing: 1px; text-transform: uppercase; color: var(--brand-brown); }
+      .meta { position: absolute; right: 72px; top: 60px;
+        font-family: 'Roboto Mono', monospace; font-weight: 400; font-size: 21px;
+        letter-spacing: 2px; color: var(--brand-muted); }
+
+      /* stage rail — the six ordinals. Amber is earned here: a genuine sequence. */
+      .rail { position: absolute; left: 72px; top: 172px; width: 1776px; height: 46px;
+        display: flex; justify-content: space-between; align-items: baseline; }
+      .rail .st { display: flex; align-items: baseline; gap: 12px; opacity: 0.22; }
+      .rail .st .n { font-family: 'Roboto Mono', monospace; font-weight: 700; font-size: 26px;
+        color: var(--brand-amber); }
+      .rail .st .l { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 25px;
+        letter-spacing: 4px; text-transform: uppercase; color: var(--brand-brown); }
+      .hairline { position: absolute; left: 72px; top: 230px; width: 1776px; height: 2px;
+        background: var(--brand-border); transform-origin: left center; }
+
+      /* ── left column: the evidence one interview actually produced ──────── */
+      .evid { position: absolute; left: 72px; top: 276px; width: 500px; }
+      .evid .h { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 23px;
+        letter-spacing: 6px; text-transform: uppercase; color: var(--brand-muted); }
+      .evid .row { display: flex; align-items: baseline; justify-content: space-between;
+        border-bottom: 2px solid var(--brand-border); padding: 22px 0 16px; }
+      .evid .row:first-of-type { margin-top: 26px; }
+      .evid .num { font-family: 'Roboto Mono', monospace; font-weight: 700; font-size: 76px;
+        line-height: 1; color: var(--brand-brown); }
+      .evid .lab { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 25px;
+        letter-spacing: 4px; text-transform: uppercase; color: var(--brand-muted); text-align: right; }
+      .evid .note { margin-top: 34px; font-family: 'Roboto Mono', monospace; font-size: 18px;
+        line-height: 1.7; letter-spacing: 1px; color: var(--brand-muted); }
+
+      /* ── the wide field: two rows of nine opportunity cards ─────────────── */
+      .fieldlab { position: absolute; left: 640px; top: 276px;
+        font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 23px;
+        letter-spacing: 6px; text-transform: uppercase; color: var(--brand-amber); }
+      .grid { position: absolute; left: 640px; top: 322px; width: 1208px;
+        display: grid; grid-template-columns: repeat(9, 120px); gap: 16px; }
+      .op { position: relative; height: 74px; background: var(--brand-linen);
+        border: 2px solid var(--brand-border); border-radius: 6px; padding: 16px 14px; }
+      .op i { display: block; height: 6px; border-radius: 3px; background: var(--brand-border); }
+      .op i + i { margin-top: 10px; width: 62%; }
+      .op .ring { position: absolute; inset: -3px; border: 3px solid var(--brand-brown);
+        border-radius: 8px; opacity: 0; }
+      .op .tick { position: absolute; right: 8px; bottom: 6px; opacity: 0;
+        font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 24px; color: var(--brand-brown); }
+      .bracket { position: absolute; left: 640px; top: 500px; width: 1208px; height: 2px;
+        background: var(--brand-border); transform-origin: center; }
+
+      /* ── the human gate. The ONLY yellow in the piece. ──────────────────── */
+      .gate { position: absolute; left: 640px; top: 540px; width: 1208px; height: 96px;
+        background: var(--brand-yellow); border-radius: 8px; display: flex; align-items: center;
+        padding: 0 30px; gap: 26px; transform-origin: left center; }
+      .gate .g1 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 44px;
+        letter-spacing: 3px; text-transform: uppercase; color: var(--brand-brown); }
+      .gate .g2 { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 22px;
+        letter-spacing: 5px; text-transform: uppercase; color: var(--brand-brown); opacity: 0.75; }
+      .gate .crit { margin-left: auto; display: flex; gap: 12px; }
+      .gate .crit span { border: 2px solid var(--brand-brown); border-radius: 999px;
+        padding: 8px 20px 6px; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 21px;
+        letter-spacing: 3px; text-transform: uppercase; color: var(--brand-brown); }
+
+      /* ── the shortlist that survives ────────────────────────────────────── */
+      .short { position: absolute; left: 640px; top: 684px; width: 1208px;
+        display: flex; align-items: center; gap: 24px; }
+      .sc { width: 196px; height: 76px; background: var(--brand-surface);
+        border: 3px solid var(--brand-brown); border-radius: 8px;
+        display: flex; align-items: center; justify-content: center; gap: 12px; }
+      .sc .tk { font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 26px; color: var(--brand-brown); }
+      .sc .nm { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 22px;
+        letter-spacing: 2px; text-transform: uppercase; color: var(--brand-brown); }
+      .sc .sco { font-family: 'Roboto Mono', monospace; font-weight: 700; font-size: 22px;
+        color: var(--brand-brown); }
+      .sc .bars { display: flex; flex-direction: column; gap: 9px; width: 74px; }
+      .sc .bars i { display: block; height: 6px; border-radius: 3px; background: var(--brand-border); }
+      .sc .bars i + i { width: 62%; }
+      .hot { margin-left: 12px; height: 76px; padding: 0 26px; border-radius: 999px;
+        border: 3px dashed var(--brand-amber); display: flex; align-items: center;
+        font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 26px;
+        letter-spacing: 5px; text-transform: uppercase; color: var(--brand-amber); }
+
+      /* ── the build lane ─────────────────────────────────────────────────── */
+      .buildlab { position: absolute; left: 640px; top: 786px;
+        font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 22px;
+        letter-spacing: 6px; text-transform: uppercase; color: var(--brand-muted); }
+      .lane { position: absolute; left: 640px; top: 824px; width: 1208px;
+        display: flex; gap: 24px; }
+      .seg { position: relative; width: 196px; height: 58px; background: var(--brand-linen);
+        border: 2px solid var(--brand-border); border-radius: 6px; overflow: hidden; }
+      .seg u { position: absolute; inset: 0; display: block; background: var(--brand-brown);
+        transform-origin: left center; }
+
+      .close { position: absolute; left: 72px; top: 936px;
+        font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 26px;
+        letter-spacing: 6px; text-transform: uppercase; color: var(--brand-muted); }
+      .close b { color: var(--brand-brown); font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="stage"
+      data-composition-id="cm4s-funnel"
+      data-start="0"
+      data-duration="15"
+      data-fps="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div class="card-host clip" id="funnel-board" data-card-id="board" data-start="0" data-duration="15" data-track-index="0"
+           style="left:0;top:0;width:1920px;height:1080px;">
+        <div class="card" data-card-id="board">
+          <div class="board">
+
+            <div class="kicker" id="kicker">Chiang Mai 4 Seasons &middot; the factory</div>
+            <div class="title" id="title">Many opportunities in.<br />A few get built.</div>
+            <div class="meta" id="meta">CM4S-L2 &middot; 2026-08-01</div>
+
+            <div class="rail">
+              <div class="st" id="st-1"><span class="n">01</span><span class="l">Questions</span></div>
+              <div class="st" id="st-2"><span class="n">02</span><span class="l">Fact sheet</span></div>
+              <div class="st" id="st-3"><span class="n">03</span><span class="l">Elaborations</span></div>
+              <div class="st" id="st-4"><span class="n">04</span><span class="l">Op cards</span></div>
+              <div class="st" id="st-5"><span class="n">05</span><span class="l">Judge</span></div>
+              <div class="st" id="st-6"><span class="n">06</span><span class="l">Build</span></div>
+            </div>
+            <div class="hairline" id="hairline"></div>
+
+            <div class="evid">
+              <div class="h" id="ev-h">One interview produced</div>
+              <div class="row" id="ev-1"><span class="num">10</span><span class="lab">Pain<br />points</span></div>
+              <div class="row" id="ev-2"><span class="num">24</span><span class="lab">Key<br />facts</span></div>
+              <div class="row" id="ev-3"><span class="num">12</span><span class="lab">Open<br />questions</span></div>
+              <div class="note" id="ev-n">one participant &middot; one session<br />chiang-mai-lifestyle &middot; report-001</div>
+            </div>
+
+            <div class="fieldlab" id="fieldlab">Elaborations &nbsp;&rarr;&nbsp; opportunity cards</div>
+            <div class="grid" id="grid">
+              <div class="op" id="op-1"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-2"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-3"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-4"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-5"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-6"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-7"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-8"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-9"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-10"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-11"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-12"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-13"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-14"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-15"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-16"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-17"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+              <div class="op" id="op-18"><i></i><i></i><span class="ring"></span><span class="tick">&#10003;</span></div>
+            </div>
+            <div class="bracket" id="bracket"></div>
+
+            <div class="gate" id="gate">
+              <span class="g1" id="gate-1">Judge</span>
+              <span class="g2" id="gate-2">A human decides</span>
+              <span class="crit">
+                <span id="cr-1">Real</span><span id="cr-2">New</span><span id="cr-3">Good</span><span id="cr-4">Feasible</span>
+              </span>
+            </div>
+
+            <div class="short">
+              <div class="sc" id="sc-1"><span class="nm">ProofPass</span><span class="sco">18/20</span></div>
+              <div class="sc" id="sc-2"><span class="tk">&#10003;</span><span class="bars"><i></i><i></i></span></div>
+              <div class="sc" id="sc-3"><span class="tk">&#10003;</span><span class="bars"><i></i><i></i></span></div>
+              <div class="sc" id="sc-4"><span class="tk">&#10003;</span><span class="bars"><i></i><i></i></span></div>
+              <div class="sc" id="sc-5"><span class="tk">&#10003;</span><span class="bars"><i></i><i></i></span></div>
+              <div class="hot" id="hot">Hot</div>
+            </div>
+
+            <div class="buildlab" id="buildlab">Build</div>
+            <div class="lane">
+              <div class="seg" id="sg-1"><u></u></div>
+              <div class="seg" id="sg-2"><u></u></div>
+              <div class="seg" id="sg-3"><u></u></div>
+              <div class="seg" id="sg-4"><u></u></div>
+              <div class="seg" id="sg-5"><u></u></div>
+            </div>
+
+            <div class="close" id="close">Superseded is not deleted &mdash; <b>the faded cards stay on the board</b></div>
+
+          </div>
+        </div>
+      </div>
+
+      <script src="vendor/gsap.min.js"></script>
+      <script>
+        (function () {
+          const gsap = window.gsap;
+          const tl = gsap.timeline({ paused: true });
+
+          const SURVIVORS = ['#op-2', '#op-6', '#op-10', '#op-14', '#op-17'];
+          const ALL = Array.from({ length: 18 }, (_, i) => '#op-' + (i + 1));
+          const LOSERS = ALL.filter((s) => SURVIVORS.indexOf(s) === -1);
+
+          // Everything starts hidden; every reveal is a fromTo so the timeline is seek-safe.
+          gsap.set(['#kicker', '#title', '#meta', '#ev-h', '#ev-1', '#ev-2', '#ev-3', '#ev-n',
+                    '#fieldlab', '#gate', '.short .sc', '#hot', '#buildlab', '.lane .seg',
+                    '#close'].join(','), { opacity: 0 });
+          gsap.set(ALL.join(','), { opacity: 0 });
+          gsap.set('#hairline, #bracket', { scaleX: 0 });
+          gsap.set('.lane .seg u', { scaleX: 0 });
+
+          // ── 0.0–0.6  the board itself ────────────────────────────────────
+          tl.fromTo('#kicker', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.10);
+          tl.fromTo('#title',  { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.22);
+          tl.fromTo('#meta',   { opacity: 0 },        { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.40);
+          tl.fromTo('#hairline', { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power2.out' }, 0.45);
+
+          // stage rail — each ordinal lights as its beat arrives
+          const light = (sel, at) =>
+            tl.fromTo(sel, { opacity: 0.22 }, { opacity: 1, duration: 0.35, ease: 'power2.out' }, at);
+
+          // ── 0.6–2.2  beat 1: the evidence one real interview produced ────
+          light('#st-1', 0.60);
+          tl.fromTo('#ev-h', { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }, 0.70);
+          tl.fromTo(['#ev-1', '#ev-2', '#ev-3'], { opacity: 0, y: 16 },
+                    { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', stagger: 0.26 }, 0.95);
+          light('#st-2', 1.50);
+          tl.fromTo('#ev-n', { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.00);
+
+          // ── 2.2–2.8  beat 2: elaborations widen the search space ─────────
+          light('#st-3', 2.20);
+          tl.fromTo('#fieldlab', { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out' }, 2.30);
+
+          // ── 2.8–4.6  beat 3: eighteen candidates land ────────────────────
+          light('#st-4', 2.80);
+          tl.fromTo(ALL, { opacity: 0, y: 22, scale: 0.86 },
+                    { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: 'back.out(1.6)', stagger: 0.075 }, 2.90);
+          tl.fromTo('#bracket', { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'power2.out' }, 4.35);
+
+          // ── 5.4–7.6  beat 4: the human gate. The only yellow in the piece.
+          light('#st-5', 5.40);
+          tl.fromTo('#gate', { opacity: 0, scaleX: 0.02 },
+                    { opacity: 1, scaleX: 1, duration: 0.55, ease: 'power3.out' }, 5.50);
+          tl.fromTo('#gate-1', { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }, 6.00);
+          tl.fromTo('#gate-2', { opacity: 0 }, { opacity: 0.75, duration: 0.4, ease: 'power2.out' }, 6.25);
+          tl.fromTo(['#cr-1', '#cr-2', '#cr-3', '#cr-4'], { opacity: 0, y: 12 },
+                    { opacity: 1, y: 0, duration: 0.32, ease: 'power2.out', stagger: 0.18 }, 6.55);
+
+          // ── 8.0–9.2  beat 5: the pass. Losers FADE, they never vanish. ───
+          tl.fromTo(LOSERS, { opacity: 1 }, { opacity: 0.16, duration: 0.5, ease: 'power2.inOut', stagger: 0.035 }, 8.00);
+          tl.fromTo(SURVIVORS, { y: 0 }, { y: -10, duration: 0.4, ease: 'back.out(2)', stagger: 0.08 }, 8.55);
+          tl.fromTo(SURVIVORS.map((s) => s + ' .ring'), { opacity: 0 },
+                    { opacity: 1, duration: 0.3, ease: 'power2.out', stagger: 0.08 }, 8.60);
+          tl.fromTo(SURVIVORS.map((s) => s + ' .tick'), { opacity: 0, scale: 0.4 },
+                    { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2.2)', stagger: 0.08 }, 8.72);
+
+          // ── 9.6–11.6  beat 6: the shortlist, and the one score we have ───
+          tl.fromTo('.short .sc', { opacity: 0, y: 24, scale: 0.9 },
+                    { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: 'back.out(1.5)', stagger: 0.19 }, 9.60);
+          tl.fromTo('#sc-1 .sco', { scale: 1 }, { scale: 1.18, duration: 0.25, ease: 'power2.out', yoyo: true, repeat: 1 }, 10.95);
+          tl.fromTo('#hot', { opacity: 0, scale: 0.7 },
+                    { opacity: 1, scale: 1, duration: 0.42, ease: 'back.out(1.8)' }, 11.20);
+
+          // ── 11.8–12.9  beat 7: the build lane fills ──────────────────────
+          light('#st-6', 11.80);
+          tl.fromTo('#buildlab', { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, 11.85);
+          tl.fromTo('.lane .seg', { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.13 }, 11.95);
+          tl.fromTo('.lane .seg u', { scaleX: 0 },
+                    { scaleX: 1, duration: 0.42, ease: 'power2.out', stagger: 0.13 }, 12.05);
+
+          // ── 13.2–14.2  beat 8: name the rule the animation just showed ───
+          tl.fromTo('#close', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, 13.20);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines['cm4s-funnel'] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>

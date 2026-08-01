@@ -1,0 +1,100 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - strong [ref=f2e5]: Saved interviews
+      - generic [ref=f2e6]: Reopen one in the workspace — transcript and evidence, read-only
+    - list [ref=f2e7]:
+      - listitem [ref=f2e8]:
+        - button [ref=f2e9] [cursor=pointer]:
+          - generic [ref=f2e10]: "#001"
+          - generic [ref=f2e11]: The participant is a Chiang Mai resident and event emcee who seeks experiences both for personal enjoyment and to explain local culture and tourism to foreign visitors. Temple visits reliably provide the relaxation, prayer, and photography outcomes they want. By contrast, a Facebook-promoted Japanese festival promised Japanese culture and activities but felt primarily like a food festival with contemporary performances, leading the participant to leave within an hour and regard the visit as wasted time. That mismatch reduced their trust in event promotion and made them more selective, with attendance around once a month considered sufficient. They now reject events using AI-generated promotional images, read social-media feedback, and sometimes ask a trusted friend to attend first and report back privately through LINE. Some friends reportedly share the same uncertainty about whether promoted events will match reality. The central decision implication is that the observed need is not broader event discovery alone, but low-effort, credible evidence that an experience is authentic and matches its promotion before someone commits limited time.
+          - generic [ref=f2e12]: "67"
+  - main [ref=f2e13]:
+    - navigation [ref=f2e14]:
+      - generic [ref=f2e15]: Interview Copilot
+      - generic [ref=f2e21]: Local prototype
+    - generic [ref=f2e22]:
+      - generic [ref=f2e23]:
+        - paragraph [ref=f2e24]: A live research partner
+        - heading "Better questions. Stronger evidence." [level=1] [ref=f2e25]: Better questions.Stronger evidence.
+        - paragraph [ref=f2e26]: Conduct the conversation. Your copilot turns it into a shared evidence pool and quietly surfaces the next question worth asking.
+        - figure "Silent research radar The next question, not more noise. Five live research paths" [ref=f2e27]:
+          - generic [ref=f2e28]:
+            - img "Five investigative research paths converging on the interviewer's next useful question" [ref=f2e29]
+            - generic [ref=f2e30]: "05"
+          - generic [ref=f2e31]:
+            - generic [ref=f2e32]:
+              - generic [ref=f2e33]: Silent research radar
+              - strong [ref=f2e34]: The next question, not more noise.
+            - list "Five live research paths" [ref=f2e35]:
+              - listitem [ref=f2e36]: Verify policy
+              - listitem [ref=f2e37]: Break absence claims
+              - listitem [ref=f2e38]: Find public data
+              - listitem [ref=f2e39]: Expose access gaps
+              - listitem [ref=f2e40]: Connect a pilot
+        - generic "Local capabilities" [ref=f2e41]:
+          - generic [ref=f2e42]:
+            - generic [ref=f2e44]:
+              - strong [ref=f2e45]: OpenAI research partner
+              - generic [ref=f2e46]: Checking local runtime
+            - generic [ref=f2e47]: gpt-5.6-sol
+          - generic [ref=f2e50]:
+            - strong [ref=f2e51]: Private transcription
+            - generic [ref=f2e52]: Runs on this Mac
+      - generic [ref=f2e54]:
+        - generic [ref=f2e55]:
+          - generic [ref=f2e56]:
+            - paragraph [ref=f2e57]: Nimman Mini Hackathon
+            - heading "Choose a conversation path" [level=2] [ref=f2e58]
+          - generic [ref=f2e59]: "04"
+        - radiogroup "Interview template library" [ref=f2e60]:
+          - radio "Track 01 · Community & belonging Digital Nomads & Chiang Mai" [checked] [ref=f2e61] [cursor=pointer]:
+            - generic [ref=f2e62]: Track 01 · Community & belonging
+            - strong [ref=f2e67]: Digital Nomads & Chiang Mai
+          - radio "Track 02 · Lifestyle & access Chiang Mai Lifestyle" [ref=f2e68] [cursor=pointer]:
+            - generic [ref=f2e69]: Track 02 · Lifestyle & access
+            - strong [ref=f2e72]: Chiang Mai Lifestyle
+          - radio "Track 03 · Urban intelligence Smart & Livable City" [ref=f2e73] [cursor=pointer]:
+            - generic [ref=f2e74]: Track 03 · Urban intelligence
+            - strong [ref=f2e77]: Smart & Livable City
+          - radio "Open track · Local problem discovery Open Problem Discovery" [ref=f2e78] [cursor=pointer]:
+            - generic [ref=f2e79]: Open track · Local problem discovery
+            - strong [ref=f2e82]: Open Problem Discovery
+        - generic [ref=f2e83]:
+          - generic [ref=f2e84]: Track 01 · Community & belonging
+          - generic [ref=f2e85]: Library template
+        - generic [ref=f2e86]: Topic
+        - textbox "Topic" [ref=f2e87]: Digital Nomads & Chiang Mai
+        - generic [ref=f2e88]: Objective
+        - textbox "Objective" [ref=f2e89]: Discover why meaningful connections between locals and remote workers do or do not form.
+        - generic [ref=f2e90]: Conversation arc
+        - generic [ref=f2e91]:
+          - generic [ref=f2e92]:
+            - generic [ref=f2e93]: "01"
+            - text: Recent context & desired outcome
+          - generic [ref=f2e96]:
+            - generic [ref=f2e97]: "02"
+            - text: Underlying why
+          - generic [ref=f2e100]:
+            - generic [ref=f2e101]: "03"
+            - text: Current reality
+          - generic [ref=f2e104]:
+            - generic [ref=f2e105]: "04"
+            - text: Expectation gap
+          - generic [ref=f2e108]:
+            - generic [ref=f2e109]: "05"
+            - text: Friction & attempts
+          - generic [ref=f2e112]:
+            - generic [ref=f2e113]: "06"
+            - text: Consequence & priority
+        - group [ref=f2e116]:
+          - generic "Conversation safety rail 6 prompts · 6 success signals" [ref=f2e117] [cursor=pointer]:
+            - text: Conversation safety rail
+            - generic [ref=f2e118]: 6 prompts · 6 success signals
+        - generic [ref=f2e119]:
+          - button "Advanced configuration" [ref=f2e120] [cursor=pointer]
+          - generic [ref=f2e124]: Default preset · Valid
+        - generic [ref=f2e125]:
+          - button "Start interview" [ref=f2e126] [cursor=pointer]
+          - button "Run guided demo" [ref=f2e129] [cursor=pointer]
+        - paragraph [ref=f2e132]: The microphone stays on until you end the interview. Audio, transcript, and the exact configuration are saved locally as they happen.
