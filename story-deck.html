@@ -24,7 +24,22 @@
   .criterion p { font-size: 1.2vw; }
   ul { margin-top: 1vw; }
   li { font-size: 1.5vw; line-height: 1.8; }
+  .slide-num { position: fixed; bottom: 2vw; right: 2vw; font-size: 1vw; color: #ccc; z-index: 10; }
 </style>
+<script>
+document.addEventListener('keydown', function(e) {
+  const slides = document.querySelector('.slides');
+  const current = Math.round(slides.scrollTop / window.innerHeight);
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+    e.preventDefault();
+    slides.scrollTo({ top: (current + 1) * window.innerHeight, behavior: 'smooth' });
+  }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    slides.scrollTo({ top: (current - 1) * window.innerHeight, behavior: 'smooth' });
+  }
+});
+</script>
 </head>
 <body>
 <div class="slides">
